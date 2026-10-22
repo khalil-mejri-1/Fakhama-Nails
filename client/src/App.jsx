@@ -992,14 +992,7 @@ export default function App() {
 
                 {/* Left: Refined luxury copy */}
                 <div className="order-2 lg:order-1 lg:col-span-7 flex flex-col items-start pr-0 lg:pr-8">
-                  <div className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border shadow-md mb-4 sm:mb-6 ${darkMode ? 'bg-[#141414] border-[#d4af37]/50' : 'bg-white border-[#d4af37]/60 shadow-sm'
-                    }`}>
-                    <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#d4af37] animate-pulse"></span>
-                    <span className={`text-[0.65rem] xs:text-xs uppercase tracking-[0.18em] sm:tracking-[0.24em] font-extrabold ${darkMode ? 'text-[#ffe08d]' : 'text-amber-900'
-                      }`}>
-                      {siteSettings.announcement || 'Haute Atelier • SoHo'}
-                    </span>
-                  </div>
+
 
                   <h1 className={`font-display-hero text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-[4.25rem] tracking-tight mb-4 sm:mb-6 leading-[1.12] sm:leading-[1.08] font-semibold ${darkMode ? 'text-white' : 'text-zinc-900'
                     }`}>
