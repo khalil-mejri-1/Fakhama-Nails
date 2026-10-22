@@ -27,7 +27,7 @@ const ensureDT = (price) => {
 
 // Luxury Haute Couture Hairline Section Divider
 const SectionDivider = ({ darkMode }) => (
-  <div className="w-full flex items-center justify-center py-6 sm:py-10 pointer-events-none select-none" aria-hidden="true">
+  <div className="w-full flex items-center justify-center pt-8 sm:pt-14 pb-2 sm:pb-3 pointer-events-none select-none" aria-hidden="true">
     <div className="flex items-center gap-3 sm:gap-4 max-w-[220px] sm:max-w-xs w-full px-4">
       <div className={`flex-1 h-[1px] bg-gradient-to-r from-transparent ${darkMode ? 'to-[#d4af37]/50' : 'to-[#d4af37]/60'}`}></div>
       <span className={`text-xs tracking-widest ${darkMode ? 'text-[#ffe08d]' : 'text-amber-800'}`}>✦</span>
@@ -991,9 +991,9 @@ export default function App() {
           {/* ============================================================== */}
           {/* SECTION 1: HERO SECTION - Grand Haute Couture Presentation    */}
           {/* ============================================================== */}
-          <section className={`relative w-full overflow-hidden transition-colors duration-300 ${darkMode
-            ? 'bg-gradient-to-b from-[#080808] via-[#0c0c0c] to-[#060606] text-white'
-            : 'bg-gradient-to-b from-[#fbf7f4] via-[#f7efe7] to-[#f2e7dc] text-[#1a1a1a]'
+          <section className={`relative w-full overflow-hidden transition-colors duration-500 ${darkMode
+            ? 'bg-gradient-to-b from-[#060607] via-[#0b0b0e] to-[#070709] text-white'
+            : 'bg-gradient-to-b from-[#fbf8f5] via-[#f7f0e7] to-[#f2e7dc] text-[#1a1a1a]'
             } pt-12 sm:pt-18 lg:pt-28 pb-20 sm:pb-28 lg:pb-36`} id="home">
             <div className="max-w-[1360px] mx-auto px-4 sm:px-8 lg:px-12 relative z-10">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center">
@@ -1109,16 +1109,15 @@ export default function App() {
 
               </div>
             </div>
+            <SectionDivider darkMode={darkMode} />
           </section>
-
-          <SectionDivider darkMode={darkMode} />
 
           {/* ============================================================== */}
           {/* SECTION 3: Services & Pricing Showcase ('The Royal Atelier Menu') */}
           {/* ============================================================== */}
           <section className={`w-full py-16 sm:py-24 lg:py-32 transition-colors duration-500 ${darkMode
-            ? 'bg-gradient-to-b from-[#080808] via-[#0d0d0d] to-[#080808] text-white'
-            : 'bg-gradient-to-b from-[#fbf8f5] to-[#f4ebe2] text-[#1a1a1a]'
+            ? 'bg-gradient-to-b from-[#0d0a07] via-[#14100b] to-[#0c0906] text-white'
+            : 'bg-gradient-to-b from-[#f5ede3] via-[#ede0d0] to-[#f4ebe1] text-[#1a1a1a]'
             }`} id="services">
             <div className="max-w-[1360px] mx-auto px-4 sm:px-8 lg:px-12">
 
@@ -1295,14 +1294,15 @@ export default function App() {
               </div>
 
             </div>
+            <SectionDivider darkMode={darkMode} />
           </section>
-
-          <SectionDivider darkMode={darkMode} />
 
           {/* ============================================================== */}
           {/* SECTION 4: Lookbook & Nail Art Gallery + Before/After Proof    */}
           {/* ============================================================== */}
-          <section className={`w-full py-16 sm:py-24 lg:py-32 transition-colors duration-500 ${darkMode ? 'bg-[#070707] text-white' : 'bg-[#fcf8f5] text-zinc-900'
+          <section className={`w-full py-16 sm:py-24 lg:py-32 transition-colors duration-500 ${darkMode
+            ? 'bg-gradient-to-b from-[#05070a] via-[#090d14] to-[#050609] text-white'
+            : 'bg-gradient-to-b from-[#ffffff] via-[#fbf9f6] to-[#f6f2ec] text-zinc-900'
             }`} id="lookbook">
             <div className="max-w-[1360px] mx-auto px-4 sm:px-8 lg:px-12">
 
@@ -1654,14 +1654,15 @@ export default function App() {
               </div>
 
             </div>
+            <SectionDivider darkMode={darkMode} />
           </section>
-
-          <SectionDivider darkMode={darkMode} />
 
           {/* ============================================================== */}
           {/* SECTION 5: Press-On Nail Atelier (Ready-to-Wear Couture Preview) */}
           {/* ============================================================== */}
-          <section className={`w-full py-16 sm:py-24 lg:py-32 transition-colors duration-500 ${darkMode ? 'bg-[#0a0a0a] text-white' : 'bg-[#f7f0eb] text-zinc-900'
+          <section className={`w-full py-16 sm:py-24 lg:py-32 transition-colors duration-500 ${darkMode
+            ? 'bg-gradient-to-b from-[#0e0911] via-[#160f1b] to-[#0d0810] text-white'
+            : 'bg-gradient-to-b from-[#fcf5f1] via-[#f7e9e1] to-[#faede6] text-zinc-900'
             }`} id="press-on-shop">
             <div className="max-w-[1360px] mx-auto px-4 sm:px-8 lg:px-12">
               <div className={`p-6 sm:p-10 lg:p-16 rounded-2xl sm:rounded-3xl backdrop-blur-2xl border transition-all duration-500 ${darkMode
@@ -1728,14 +1729,15 @@ export default function App() {
 
               </div>
             </div>
+            <SectionDivider darkMode={darkMode} />
           </section>
-
-          <SectionDivider darkMode={darkMode} />
 
           {/* ============================================================== */}
           {/* SECTION 6: Uncompromising Hygiene & Safety Standards           */}
           {/* ============================================================== */}
-          <section className={`w-full py-16 sm:py-24 lg:py-32 transition-colors duration-500 ${darkMode ? 'bg-[#070707] text-white' : 'bg-[#fcf8f5] text-zinc-900'
+          <section className={`w-full py-16 sm:py-24 lg:py-32 transition-colors duration-500 ${darkMode
+            ? 'bg-gradient-to-b from-[#060a09] via-[#0a1210] to-[#060908] text-white'
+            : 'bg-gradient-to-b from-[#f3f7f6] via-[#e8f1ef] to-[#f2f7f5] text-zinc-900'
             }`} id="hygiene">
             <div className="max-w-[1360px] mx-auto px-4 sm:px-8 lg:px-12">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-12 lg:gap-16 items-center">
@@ -1848,16 +1850,15 @@ export default function App() {
 
               </div>
             </div>
+            <SectionDivider darkMode={darkMode} />
           </section>
-
-          <SectionDivider darkMode={darkMode} />
 
           {/* ============================================================== */}
           {/* SECTION 7: Authentic Female Social Proof & Endorsements       */}
           {/* ============================================================== */}
           <section className={`w-full py-16 sm:py-24 lg:py-32 transition-colors duration-500 ${darkMode
-            ? 'bg-gradient-to-b from-[#0a0a0a] via-[#0e0e0e] to-[#070707] text-white'
-            : 'bg-gradient-to-b from-[#f8f3ef] via-[#faf6f2] to-[#f4eee8] text-zinc-900'
+            ? 'bg-gradient-to-b from-[#110e08] via-[#18130a] to-[#0f0c07] text-white'
+            : 'bg-gradient-to-b from-[#f9f3ea] via-[#f3e7d5] to-[#f7eee1] text-zinc-900'
             }`}>
             <div className="max-w-[1360px] mx-auto px-4 sm:px-8 lg:px-12">
               <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
@@ -1983,14 +1984,15 @@ export default function App() {
 
               </div>
             </div>
+            <SectionDivider darkMode={darkMode} />
           </section>
-
-          <SectionDivider darkMode={darkMode} />
 
           {/* ============================================================== */}
           {/* SECTION 8: VIP Concierge & Atelier Visit Banner                */}
           {/* ============================================================== */}
-          <section className={`w-full py-16 sm:py-24 lg:py-32 transition-colors duration-500 ${darkMode ? 'bg-[#070707] text-white' : 'bg-[#fcf8f5] text-zinc-900'
+          <section className={`w-full py-16 sm:py-24 lg:py-32 transition-colors duration-500 ${darkMode
+            ? 'bg-gradient-to-b from-[#08070a] via-[#0d0c11] to-[#060608] text-white'
+            : 'bg-gradient-to-b from-[#f6efe8] via-[#ebe0d4] to-[#f4ece2] text-zinc-900'
             }`} id="sanctuary">
             <div className="max-w-[1360px] mx-auto px-4 sm:px-8 lg:px-12">
               <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-gradient-to-br from-[#141414] via-[#181818] to-[#0d0d0d] p-7 sm:p-12 lg:p-20 border border-[#d4af37]/50 shadow-[0_25px_60px_rgba(0,0,0,0.95)]">
@@ -2056,8 +2058,6 @@ export default function App() {
             </div>
           </section>
 
-          <SectionDivider darkMode={darkMode} />
-
         </div>
       </main>
 
@@ -2065,8 +2065,8 @@ export default function App() {
       {/* EXPANSIVE FULL-WIDTH HAUTE COUTURE FOOTER                      */}
       {/* ============================================================== */}
       <footer className={`w-full transition-colors duration-500 pt-16 sm:pt-24 lg:pt-28 pb-12 sm:pb-16 border-t-2 relative ${darkMode
-        ? 'bg-gradient-to-b from-[#0a0a0a] via-[#050505] to-[#000000] text-white border-[#d4af37]/40 shadow-[0_-20px_50px_rgba(0,0,0,0.95)]'
-        : 'bg-gradient-to-b from-[#fcf9f6] via-[#f7f1eb] to-[#efe6dc] text-zinc-900 border-[#d4af37]/40 shadow-xl'
+        ? 'bg-gradient-to-b from-[#080808] via-[#040404] to-[#000000] text-white border-[#d4af37]/40 shadow-[0_-20px_50px_rgba(0,0,0,0.95)]'
+        : 'bg-gradient-to-b from-[#eee4d7] via-[#e5d7c6] to-[#dbcab6] text-zinc-900 border-[#d4af37]/40 shadow-xl'
         }`}>
 
         {/* Full-Width Expansive Container (Edge-to-Edge with Generous Luxury Margins) */}
