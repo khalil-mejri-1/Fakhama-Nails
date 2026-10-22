@@ -1305,282 +1305,49 @@ export default function App() {
                 </p>
               </div>
 
-              {/* Haute Couture Organized Bento Gallery (Tablet 2-1-2-1 / Desktop 8+4, 4+8, 6+6 / Mobile 1-col) */}
-              <div className="mb-14 sm:mb-20">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 items-stretch">
-
-                    {/* ROW 1 — Card 1: Wide Runway Panoramic Feature (Tablet Span 2, Desktop Span 8) */}
+              {/* Haute Couture Lookbook Grid (2-col mobile, 3-col desktop with tight luxury gaps) */}
+              <div className="mb-10 sm:mb-14">
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-2.5 xs:gap-3 sm:gap-4 lg:gap-5">
+                  {galleryItems.map((item) => (
                     <div
-                      onClick={() => setLightboxItem(galleryItems[0])}
-                      className="group relative rounded-2xl sm:rounded-3xl overflow-hidden col-span-1 md:col-span-2 lg:col-span-8 h-[340px] xs:h-[380px] sm:h-[400px] md:h-[430px] lg:h-[460px] bg-[#0a0a0a] shadow-2xl border border-[#d4af37]/40 cursor-pointer transition-all duration-500 hover:shadow-[0_20px_50px_rgba(212,175,55,0.25)] hover:border-[#ffe08d]"
+                      key={item.id}
+                      onClick={() => setLightboxItem(item)}
+                      className={`group relative rounded-xl sm:rounded-2xl lg:rounded-3xl overflow-hidden aspect-[4/5] border transition-all duration-500 cursor-pointer shadow-lg hover:shadow-[0_16px_40px_rgba(212,175,55,0.25)] hover:border-[#ffe08d] ${
+                        darkMode ? 'bg-[#0e1018] border-[#d4af37]/35' : 'bg-white border-[#d4af37]/30 shadow-md'
+                      }`}
                     >
+                      {/* Image with smooth luxury hover zoom */}
                       <img
                         className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                        alt={galleryItems[0].title}
-                        src={galleryItems[0].image}
+                        alt={item.title}
+                        src={item.image}
+                        loading="lazy"
                       />
-                      {/* Top Badges */}
-                      <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-10 flex items-center gap-1.5 sm:gap-2">
-                        <span className="px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-black/75 backdrop-blur-md border border-[#d4af37]/60 text-[#ffe08d] font-label-sm text-[0.65rem] sm:text-xs tracking-wider uppercase font-semibold shadow-md">
-                          {galleryItems[0].tag}
-                        </span>
-                        <span className="hidden sm:inline-block px-3 py-1.5 rounded-full bg-black/50 backdrop-blur-md border border-white/20 text-white/90 font-label-sm text-[0.65rem] tracking-widest uppercase">
-                          Runway Panorama
-                        </span>
-                      </div>
-                      <button
-                        onClick={(e) => { e.stopPropagation(); setLightboxItem(galleryItems[0]); }}
-                        className="absolute top-3 right-3 sm:top-4 sm:right-4 z-10 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-black/60 hover:bg-[#d4af37] text-[#ffe08d] hover:text-black border border-[#d4af37]/50 backdrop-blur-md flex items-center justify-center opacity-90 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-300 shadow-md"
-                        title="Inspecter en haute définition"
-                      >
-                        <span className="material-symbols-outlined text-base sm:text-lg">zoom_in</span>
-                      </button>
-                      {/* Bottom Low-Profile Info Bar */}
-                      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/70 to-transparent pt-12 sm:pt-16 pb-3.5 sm:pb-5 px-4 sm:px-6 md:px-7 flex flex-col sm:flex-row sm:items-end justify-between gap-2.5 sm:gap-3 transition-all duration-300">
-                        <div>
-                          <span className="font-label-sm text-[0.625rem] sm:text-[0.6875rem] uppercase tracking-[0.18em] sm:tracking-[0.2em] text-[#ffe08d] font-semibold mb-0.5 sm:mb-1 block">
-                            Master Artist: {galleryItems[0].artist} • {galleryItems[0].category}
-                          </span>
-                          <h4 className="font-display-hero text-lg xs:text-xl sm:text-2xl lg:text-3xl text-white font-bold tracking-tight">
-                            {galleryItems[0].title}
-                          </h4>
-                          <p className="font-body-sm text-[0.7rem] sm:text-xs text-zinc-300 mt-0.5 line-clamp-1 max-w-lg">
-                            {galleryItems[0].description}
-                          </p>
-                        </div>
-                        <button
-                          onClick={(e) => { e.stopPropagation(); handleBooking(galleryItems[0].title); }}
-                          className="self-start sm:self-auto shrink-0 px-3.5 xs:px-4 sm:px-5 py-1.5 xs:py-2 sm:py-2.5 rounded-full bg-gradient-to-r from-[#ffe08d] via-[#d4af37] to-[#b38f26] text-black font-label-sm text-[0.7rem] sm:text-xs uppercase tracking-wider font-bold shadow-md hover:brightness-110 transition-all cursor-pointer flex items-center gap-1.5"
-                        >
-                          <span>Book Look</span>
-                          <span className="material-symbols-outlined text-sm">auto_awesome</span>
-                        </button>
-                      </div>
-                    </div>
 
-                    {/* ROW 1 — Card 2: Editorial Portrait Feature (Tablet Span 1, Desktop Span 4) */}
-                    <div
-                      onClick={() => setLightboxItem(galleryItems[1])}
-                      className="group relative rounded-2xl sm:rounded-3xl overflow-hidden col-span-1 md:col-span-1 lg:col-span-4 h-[340px] xs:h-[380px] sm:h-[400px] md:h-[430px] lg:h-[460px] bg-[#0a0a0a] shadow-2xl border border-[#d4af37]/40 cursor-pointer transition-all duration-500 hover:shadow-[0_20px_50px_rgba(212,175,55,0.25)] hover:border-[#ffe08d]"
-                    >
-                      <img
-                        className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                        alt={galleryItems[1].title}
-                        src={galleryItems[1].image}
-                      />
-                      <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-10">
-                        <span className="px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-black/75 backdrop-blur-md border border-[#d4af37]/60 text-[#ffe08d] font-label-sm text-[0.65rem] sm:text-xs tracking-wider uppercase font-semibold shadow-md">
-                          {galleryItems[1].tag}
+                      {/* Top Minimalist Tag */}
+                      <div className="absolute top-2 left-2 sm:top-3.5 sm:left-3.5 z-10">
+                        <span className="px-2 py-0.5 sm:px-3 sm:py-1 rounded-full bg-black/70 backdrop-blur-md border border-[#d4af37]/50 text-[#ffe08d] font-label-sm text-[0.58rem] xs:text-[0.625rem] sm:text-xs tracking-wider uppercase font-semibold shadow-sm">
+                          {item.tag}
                         </span>
                       </div>
-                      <button
-                        onClick={(e) => { e.stopPropagation(); setLightboxItem(galleryItems[1]); }}
-                        className="absolute top-3 right-3 sm:top-4 sm:right-4 z-10 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-black/60 hover:bg-[#d4af37] text-[#ffe08d] hover:text-black border border-[#d4af37]/50 backdrop-blur-md flex items-center justify-center opacity-90 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-300 shadow-md"
-                        title="Inspecter en haute définition"
-                      >
-                        <span className="material-symbols-outlined text-base sm:text-lg">zoom_in</span>
-                      </button>
-                      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/70 to-transparent pt-12 sm:pt-16 pb-3.5 sm:pb-5 px-4 sm:px-6 flex flex-col justify-end transition-all duration-300">
-                        <span className="font-label-sm text-[0.625rem] sm:text-[0.6875rem] uppercase tracking-[0.18em] sm:tracking-[0.2em] text-[#ffe08d] font-semibold mb-0.5 sm:mb-1 block">
-                          Master Artist: {galleryItems[1].artist}
+
+                      {/* Top Right Zoom Icon (Desktop Hover) */}
+                      <div className="absolute top-2 right-2 sm:top-3.5 sm:right-3.5 z-10 w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-black/60 backdrop-blur-md border border-[#d4af37]/40 text-[#ffe08d] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-md pointer-events-none">
+                        <span className="material-symbols-outlined text-xs sm:text-base">zoom_in</span>
+                      </div>
+
+                      {/* Bottom Editorial Caption Bar */}
+                      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/75 to-transparent pt-8 sm:pt-14 pb-2.5 sm:pb-4 px-2.5 xs:px-3 sm:px-5 flex flex-col justify-end transition-all duration-300">
+                        <span className="font-label-sm text-[0.55rem] xs:text-[0.625rem] sm:text-[0.6875rem] uppercase tracking-[0.16em] text-[#ffe08d] font-semibold mb-0.5 line-clamp-1">
+                          {item.artist} • {item.category}
                         </span>
-                        <h4 className="font-display-hero text-lg xs:text-xl sm:text-2xl text-white font-bold tracking-tight mb-1.5 sm:mb-2">
-                          {galleryItems[1].title}
+                        <h4 className="font-display-hero text-xs xs:text-sm sm:text-base lg:text-lg text-white font-bold tracking-tight line-clamp-1">
+                          {item.title}
                         </h4>
-                        <div className="flex items-center justify-between pt-1">
-                          <span className="font-label-sm text-[0.7rem] sm:text-xs text-[#ffe08d]/90 uppercase tracking-wider">
-                            24K Gold Leaf
-                          </span>
-                          <button
-                            onClick={(e) => { e.stopPropagation(); handleBooking(galleryItems[1].title); }}
-                            className="px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full bg-gradient-to-r from-[#ffe08d] via-[#d4af37] to-[#b38f26] text-black font-label-sm text-[0.7rem] sm:text-xs uppercase tracking-wider font-bold shadow-md hover:brightness-110 transition-all cursor-pointer"
-                          >
-                            Book Look
-                          </button>
-                        </div>
                       </div>
                     </div>
-
-                    {/* ROW 2 — Card 3: Editorial Portrait Feature (Tablet Span 1, Desktop Span 4) */}
-                    <div
-                      onClick={() => setLightboxItem(galleryItems[2])}
-                      className="group relative rounded-2xl sm:rounded-3xl overflow-hidden col-span-1 md:col-span-1 lg:col-span-4 h-[340px] xs:h-[380px] sm:h-[400px] md:h-[430px] lg:h-[460px] bg-[#0a0a0a] shadow-2xl border border-[#d4af37]/40 cursor-pointer transition-all duration-500 hover:shadow-[0_20px_50px_rgba(212,175,55,0.25)] hover:border-[#ffe08d]"
-                    >
-                      <img
-                        className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                        alt={galleryItems[2].title}
-                        src={galleryItems[2].image}
-                      />
-                      <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-10">
-                        <span className="px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-black/75 backdrop-blur-md border border-[#d4af37]/60 text-[#ffe08d] font-label-sm text-[0.65rem] sm:text-xs tracking-wider uppercase font-semibold shadow-md">
-                          {galleryItems[2].tag}
-                        </span>
-                      </div>
-                      <button
-                        onClick={(e) => { e.stopPropagation(); setLightboxItem(galleryItems[2]); }}
-                        className="absolute top-3 right-3 sm:top-4 sm:right-4 z-10 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-black/60 hover:bg-[#d4af37] text-[#ffe08d] hover:text-black border border-[#d4af37]/50 backdrop-blur-md flex items-center justify-center opacity-90 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-300 shadow-md"
-                        title="Inspecter en haute définition"
-                      >
-                        <span className="material-symbols-outlined text-base sm:text-lg">zoom_in</span>
-                      </button>
-                      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/70 to-transparent pt-12 sm:pt-16 pb-3.5 sm:pb-5 px-4 sm:px-6 flex flex-col justify-end transition-all duration-300">
-                        <span className="font-label-sm text-[0.625rem] sm:text-[0.6875rem] uppercase tracking-[0.18em] sm:tracking-[0.2em] text-[#ffe08d] font-semibold mb-0.5 sm:mb-1 block">
-                          Master Artist: {galleryItems[2].artist}
-                        </span>
-                        <h4 className="font-display-hero text-lg xs:text-xl sm:text-2xl text-white font-bold tracking-tight mb-1.5 sm:mb-2">
-                          {galleryItems[2].title}
-                        </h4>
-                        <div className="flex items-center justify-between pt-1">
-                          <span className="font-label-sm text-[0.7rem] sm:text-xs text-[#ffe08d]/90 uppercase tracking-wider">
-                            Velvet Cat-Eye
-                          </span>
-                          <button
-                            onClick={(e) => { e.stopPropagation(); handleBooking(galleryItems[2].title); }}
-                            className="px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full bg-gradient-to-r from-[#ffe08d] via-[#d4af37] to-[#b38f26] text-black font-label-sm text-[0.7rem] sm:text-xs uppercase tracking-wider font-bold shadow-md hover:brightness-110 transition-all cursor-pointer"
-                          >
-                            Book Look
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* ROW 2 — Card 4: Wide Bridal Masterpiece Feature (Tablet Span 2, Desktop Span 8) */}
-                    <div
-                      onClick={() => setLightboxItem(galleryItems[3])}
-                      className="group relative rounded-2xl sm:rounded-3xl overflow-hidden col-span-1 md:col-span-2 lg:col-span-8 h-[340px] xs:h-[380px] sm:h-[400px] md:h-[430px] lg:h-[460px] bg-[#0a0a0a] shadow-2xl border border-[#d4af37]/45 cursor-pointer transition-all duration-500 hover:shadow-[0_20px_50px_rgba(212,175,55,0.3)] hover:border-[#ffe08d]"
-                    >
-                      <img
-                        className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                        alt={galleryItems[3].title}
-                        src={galleryItems[3].image}
-                      />
-                      <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-10 flex items-center gap-1.5 sm:gap-2">
-                        <span className="px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-gradient-to-r from-[#ffe08d] via-[#d4af37] to-[#b38f26] text-black font-label-sm text-[0.65rem] sm:text-xs tracking-wider uppercase font-bold shadow-md">
-                          ✨ Bridal Haute Couture
-                        </span>
-                        <span className="hidden sm:inline-block px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white/90 font-label-sm text-[0.65rem] tracking-widest uppercase">
-                          {galleryItems[3].tag}
-                        </span>
-                      </div>
-                      <button
-                        onClick={(e) => { e.stopPropagation(); setLightboxItem(galleryItems[3]); }}
-                        className="absolute top-3 right-3 sm:top-4 sm:right-4 z-10 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-black/60 hover:bg-[#d4af37] text-[#ffe08d] hover:text-black border border-[#d4af37]/50 backdrop-blur-md flex items-center justify-center opacity-90 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-300 shadow-md"
-                        title="Inspecter en haute définition"
-                      >
-                        <span className="material-symbols-outlined text-base sm:text-lg">zoom_in</span>
-                      </button>
-                      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/70 to-transparent pt-12 sm:pt-16 pb-3.5 sm:pb-5 px-4 sm:px-6 md:px-7 flex flex-col sm:flex-row sm:items-end justify-between gap-2.5 sm:gap-3 transition-all duration-300">
-                        <div>
-                          <span className="font-label-sm text-[0.625rem] sm:text-[0.6875rem] uppercase tracking-[0.18em] sm:tracking-[0.2em] text-[#ffe08d] font-semibold mb-0.5 sm:mb-1 block">
-                            Master Artist: {galleryItems[3].artist} • Signature Bridal Piece
-                          </span>
-                          <h4 className="font-display-hero text-lg xs:text-xl sm:text-2xl lg:text-3xl text-white font-bold tracking-tight">
-                            {galleryItems[3].title}
-                          </h4>
-                          <p className="font-body-sm text-[0.7rem] sm:text-xs text-zinc-300 mt-0.5 line-clamp-1 max-w-lg">
-                            {galleryItems[3].description}
-                          </p>
-                        </div>
-                        <button
-                          onClick={(e) => { e.stopPropagation(); handleBooking(galleryItems[3].title); }}
-                          className="self-start sm:self-auto shrink-0 px-3.5 xs:px-4 sm:px-5 py-1.5 xs:py-2 sm:py-2.5 rounded-full bg-gradient-to-r from-[#ffe08d] via-[#d4af37] to-[#b38f26] text-black font-label-sm text-[0.7rem] sm:text-xs uppercase tracking-wider font-bold shadow-md hover:brightness-110 transition-all cursor-pointer flex items-center gap-1.5"
-                        >
-                          <span>Book Look</span>
-                          <span className="material-symbols-outlined text-sm">auto_awesome</span>
-                        </button>
-                      </div>
-                    </div>
-
-                    {/* ROW 3 — Card 5: Balanced Studio Canvas (Tablet Span 1, Desktop Span 6) */}
-                    <div
-                      onClick={() => setLightboxItem(galleryItems[4])}
-                      className="group relative rounded-2xl sm:rounded-3xl overflow-hidden col-span-1 md:col-span-1 lg:col-span-6 h-[320px] xs:h-[360px] sm:h-[380px] md:h-[400px] lg:h-[430px] bg-[#0a0a0a] shadow-2xl border border-[#d4af37]/40 cursor-pointer transition-all duration-500 hover:shadow-[0_20px_50px_rgba(212,175,55,0.25)] hover:border-[#ffe08d]"
-                    >
-                      <img
-                        className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                        alt={galleryItems[4].title}
-                        src={galleryItems[4].image}
-                      />
-                      <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-10">
-                        <span className="px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-black/75 backdrop-blur-md border border-[#d4af37]/60 text-[#ffe08d] font-label-sm text-[0.65rem] sm:text-xs tracking-wider uppercase font-semibold shadow-md">
-                          {galleryItems[4].tag}
-                        </span>
-                      </div>
-                      <button
-                        onClick={(e) => { e.stopPropagation(); setLightboxItem(galleryItems[4]); }}
-                        className="absolute top-3 right-3 sm:top-4 sm:right-4 z-10 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-black/60 hover:bg-[#d4af37] text-[#ffe08d] hover:text-black border border-[#d4af37]/50 backdrop-blur-md flex items-center justify-center opacity-90 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-300 shadow-md"
-                        title="Inspecter en haute définition"
-                      >
-                        <span className="material-symbols-outlined text-base sm:text-lg">zoom_in</span>
-                      </button>
-                      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/70 to-transparent pt-12 sm:pt-16 pb-3.5 sm:pb-5 px-4 sm:px-6 flex flex-col sm:flex-row sm:items-end justify-between gap-2.5 sm:gap-3 transition-all duration-300">
-                        <div>
-                          <span className="font-label-sm text-[0.625rem] sm:text-[0.6875rem] uppercase tracking-[0.18em] sm:tracking-[0.2em] text-[#ffe08d] font-semibold mb-0.5 sm:mb-1 block">
-                            Master Artist: {galleryItems[4].artist} • 3D Relief
-                          </span>
-                          <h4 className="font-display-hero text-lg xs:text-xl sm:text-2xl text-white font-bold tracking-tight">
-                            {galleryItems[4].title}
-                          </h4>
-                          <p className="font-body-sm text-[0.7rem] sm:text-xs text-zinc-300 mt-0.5 line-clamp-1 max-w-sm">
-                            {galleryItems[4].description}
-                          </p>
-                        </div>
-                        <button
-                          onClick={(e) => { e.stopPropagation(); handleBooking(galleryItems[4].title); }}
-                          className="self-start sm:self-auto shrink-0 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full bg-gradient-to-r from-[#ffe08d] via-[#d4af37] to-[#b38f26] text-black font-label-sm text-[0.7rem] sm:text-xs uppercase tracking-wider font-bold shadow-md hover:brightness-110 transition-all cursor-pointer"
-                        >
-                          Book Look
-                        </button>
-                      </div>
-                    </div>
-
-                    {/* ROW 3 — Card 6: Balanced Studio Canvas (Tablet Span 1, Desktop Span 6) */}
-                    <div
-                      onClick={() => setLightboxItem(galleryItems[5])}
-                      className="group relative rounded-2xl sm:rounded-3xl overflow-hidden col-span-1 md:col-span-1 lg:col-span-6 h-[320px] xs:h-[360px] sm:h-[380px] md:h-[400px] lg:h-[430px] bg-[#0a0a0a] shadow-2xl border border-[#d4af37]/40 cursor-pointer transition-all duration-500 hover:shadow-[0_20px_50px_rgba(212,175,55,0.25)] hover:border-[#ffe08d]"
-                    >
-                      <img
-                        className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                        alt={galleryItems[5].title}
-                        src={galleryItems[5].image}
-                      />
-                      <div className="absolute top-3 left-3 sm:top-4 sm:left-4 z-10 flex items-center gap-1.5 sm:gap-2">
-                        <span className="px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-black/75 backdrop-blur-md border border-[#d4af37]/60 text-[#ffe08d] font-label-sm text-[0.65rem] sm:text-xs tracking-wider uppercase font-semibold shadow-md">
-                          {galleryItems[5].tag}
-                        </span>
-                        <span className="hidden sm:inline-block px-3 py-1.5 rounded-full bg-black/50 backdrop-blur-md border border-white/20 text-white/90 font-label-sm text-[0.65rem] tracking-widest uppercase">
-                          Fine Brushwork
-                        </span>
-                      </div>
-                      <button
-                        onClick={(e) => { e.stopPropagation(); setLightboxItem(galleryItems[5]); }}
-                        className="absolute top-3 right-3 sm:top-4 sm:right-4 z-10 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-black/60 hover:bg-[#d4af37] text-[#ffe08d] hover:text-black border border-[#d4af37]/50 backdrop-blur-md flex items-center justify-center opacity-90 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-300 shadow-md"
-                        title="Inspecter en haute définition"
-                      >
-                        <span className="material-symbols-outlined text-base sm:text-lg">zoom_in</span>
-                      </button>
-                      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black via-black/70 to-transparent pt-12 sm:pt-16 pb-3.5 sm:pb-5 px-4 sm:px-6 flex flex-col sm:flex-row sm:items-end justify-between gap-2.5 sm:gap-3 transition-all duration-300">
-                        <div>
-                          <span className="font-label-sm text-[0.625rem] sm:text-[0.6875rem] uppercase tracking-[0.18em] sm:tracking-[0.2em] text-[#ffe08d] font-semibold mb-0.5 sm:mb-1 block">
-                            Master Artist: {galleryItems[5].artist} • Kyoto Botanical Art
-                          </span>
-                          <h4 className="font-display-hero text-lg xs:text-xl sm:text-2xl text-white font-bold tracking-tight">
-                            {galleryItems[5].title}
-                          </h4>
-                          <p className="font-body-sm text-[0.7rem] sm:text-xs text-zinc-300 mt-0.5 line-clamp-1 max-w-sm">
-                            {galleryItems[5].description}
-                          </p>
-                        </div>
-                        <button
-                          onClick={(e) => { e.stopPropagation(); handleBooking(galleryItems[5].title); }}
-                          className="self-start sm:self-auto shrink-0 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full bg-gradient-to-r from-[#ffe08d] via-[#d4af37] to-[#b38f26] text-black font-label-sm text-[0.7rem] sm:text-xs uppercase tracking-wider font-bold shadow-md hover:brightness-110 transition-all cursor-pointer"
-                        >
-                          Book Look
-                        </button>
-                      </div>
-                    </div>
-
-                  </div>
+                  ))}
+                </div>
               </div>
 
               {/* SPOTLIGHT: Before & After Nail Transformation Trust Card */}
