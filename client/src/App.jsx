@@ -977,14 +977,14 @@ export default function App() {
       </header>
 
       {/* MAIN CONTAINER */}
-      <main className={`w-full pt-16 sm:pt-20 transition-colors duration-300 ${darkMode ? 'bg-[#070707]' : 'bg-[#fcf8f5]'}`}>
+      <main className={`w-full pt-16 sm:pt-20 transition-colors duration-300 ${darkMode ? 'bg-[#08080a]' : 'bg-[#fbf8f5]'}`}>
         <div className="flex flex-col w-full">
 
           {/* ============================================================== */}
           {/* SECTION 1: HERO SECTION - Grand Haute Couture Presentation    */}
           {/* ============================================================== */}
           <section className={`relative w-full overflow-hidden transition-colors duration-500 ${darkMode
-            ? 'bg-gradient-to-b from-[#060607] via-[#0b0b0e] to-[#070709] text-white'
+            ? 'bg-gradient-to-b from-[#08080a] via-[#0d0c12] to-[#121118] text-white'
             : 'bg-gradient-to-b from-[#fbf8f5] via-[#f7f0e7] to-[#f2e7dc] text-[#1a1a1a]'
             } pt-12 sm:pt-18 lg:pt-28 pb-20 sm:pb-28 lg:pb-36`} id="home">
             <div className="max-w-[1360px] mx-auto px-4 sm:px-8 lg:px-12 relative z-10">
@@ -1101,8 +1101,8 @@ export default function App() {
           {/* SECTION 3: Services & Pricing Showcase ('The Royal Atelier Menu') */}
           {/* ============================================================== */}
           <section className={`w-full py-16 sm:py-24 lg:py-32 transition-colors duration-500 ${darkMode
-            ? 'bg-gradient-to-b from-[#0d0a07] via-[#14100b] to-[#0c0906] text-white'
-            : 'bg-gradient-to-b from-[#f5ede3] via-[#ede0d0] to-[#f4ebe1] text-[#1a1a1a]'
+            ? 'bg-gradient-to-b from-[#121118] via-[#1c1824] to-[#111018] text-white'
+            : 'bg-gradient-to-b from-[#f2e7dc] via-[#ede0d0] to-[#f5ede3] text-[#1a1a1a]'
             }`} id="services">
             <div className="max-w-[1360px] mx-auto px-4 sm:px-8 lg:px-12">
 
@@ -1286,8 +1286,8 @@ export default function App() {
           {/* SECTION 4: Lookbook & Nail Art Gallery + Before/After Proof    */}
           {/* ============================================================== */}
           <section className={`w-full py-16 sm:py-24 lg:py-32 transition-colors duration-500 ${darkMode
-            ? 'bg-gradient-to-b from-[#05070a] via-[#090d14] to-[#050609] text-white'
-            : 'bg-gradient-to-b from-[#ffffff] via-[#fbf9f6] to-[#f6f2ec] text-zinc-900'
+            ? 'bg-gradient-to-b from-[#111018] via-[#0d101a] to-[#0e121d] text-white'
+            : 'bg-gradient-to-b from-[#f5ede3] via-[#ffffff] to-[#f6f2ec] text-zinc-900'
             }`} id="lookbook">
             <div className="max-w-[1360px] mx-auto px-4 sm:px-8 lg:px-12">
 
@@ -1646,8 +1646,8 @@ export default function App() {
           {/* SECTION 5: Press-On Nail Atelier (Ready-to-Wear Couture Preview) */}
           {/* ============================================================== */}
           <section className={`w-full py-16 sm:py-24 lg:py-32 transition-colors duration-500 ${darkMode
-            ? 'bg-gradient-to-b from-[#0e0911] via-[#160f1b] to-[#0d0810] text-white'
-            : 'bg-gradient-to-b from-[#fcf5f1] via-[#f7e9e1] to-[#faede6] text-zinc-900'
+            ? 'bg-gradient-to-b from-[#0e121d] via-[#1c1324] to-[#130d1b] text-white'
+            : 'bg-gradient-to-b from-[#f6f2ec] via-[#f7e9e1] to-[#faede6] text-zinc-900'
             }`} id="press-on-shop">
             <div className="max-w-[1360px] mx-auto px-4 sm:px-8 lg:px-12">
               <div className={`p-6 sm:p-10 lg:p-16 rounded-2xl sm:rounded-3xl backdrop-blur-2xl border transition-all duration-500 ${darkMode
@@ -1721,8 +1721,8 @@ export default function App() {
           {/* SECTION 6: Uncompromising Hygiene & Safety Standards           */}
           {/* ============================================================== */}
           <section className={`w-full py-16 sm:py-24 lg:py-32 transition-colors duration-500 ${darkMode
-            ? 'bg-gradient-to-b from-[#060a09] via-[#0a1210] to-[#060908] text-white'
-            : 'bg-gradient-to-b from-[#f3f7f6] via-[#e8f1ef] to-[#f2f7f5] text-zinc-900'
+            ? 'bg-gradient-to-b from-[#130d1b] via-[#0f1a18] to-[#111f1c] text-white'
+            : 'bg-gradient-to-b from-[#faede6] via-[#e8f1ef] to-[#f2f7f5] text-zinc-900'
             }`} id="hygiene">
             <div className="max-w-[1360px] mx-auto px-4 sm:px-8 lg:px-12">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-12 lg:gap-16 items-center">
@@ -1842,8 +1842,8 @@ export default function App() {
           {/* SECTION 7: Authentic Female Social Proof & Endorsements       */}
           {/* ============================================================== */}
           <section className={`w-full py-16 sm:py-24 lg:py-32 transition-colors duration-500 ${darkMode
-            ? 'bg-gradient-to-b from-[#110e08] via-[#18130a] to-[#0f0c07] text-white'
-            : 'bg-gradient-to-b from-[#f9f3ea] via-[#f3e7d5] to-[#f7eee1] text-zinc-900'
+            ? 'bg-gradient-to-b from-[#111f1c] via-[#241c12] to-[#18120a] text-white'
+            : 'bg-gradient-to-b from-[#f2f7f5] via-[#f3e7d5] to-[#f7eee1] text-zinc-900'
             }`}>
             <div className="max-w-[1360px] mx-auto px-4 sm:px-8 lg:px-12">
               <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
@@ -1976,8 +1976,8 @@ export default function App() {
           {/* SECTION 8: VIP Concierge & Atelier Visit Banner                */}
           {/* ============================================================== */}
           <section className={`w-full py-16 sm:py-24 lg:py-32 transition-colors duration-500 ${darkMode
-            ? 'bg-gradient-to-b from-[#08070a] via-[#0d0c11] to-[#060608] text-white'
-            : 'bg-gradient-to-b from-[#f6efe8] via-[#ebe0d4] to-[#f4ece2] text-zinc-900'
+            ? 'bg-gradient-to-b from-[#18120a] via-[#121119] to-[#0a0a0f] text-white'
+            : 'bg-gradient-to-b from-[#f7eee1] via-[#ebe0d4] to-[#f5ece1] text-zinc-900'
             }`} id="sanctuary">
             <div className="max-w-[1360px] mx-auto px-4 sm:px-8 lg:px-12">
               <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-gradient-to-br from-[#141414] via-[#181818] to-[#0d0d0d] p-7 sm:p-12 lg:p-20 border border-[#d4af37]/50 shadow-[0_25px_60px_rgba(0,0,0,0.95)]">
@@ -2050,8 +2050,8 @@ export default function App() {
       {/* EXPANSIVE FULL-WIDTH HAUTE COUTURE FOOTER                      */}
       {/* ============================================================== */}
       <footer className={`w-full transition-colors duration-500 pt-16 sm:pt-24 lg:pt-28 pb-12 sm:pb-16 border-t-2 relative ${darkMode
-        ? 'bg-gradient-to-b from-[#080808] via-[#040404] to-[#000000] text-white border-[#d4af37]/40 shadow-[0_-20px_50px_rgba(0,0,0,0.95)]'
-        : 'bg-gradient-to-b from-[#eee4d7] via-[#e5d7c6] to-[#dbcab6] text-zinc-900 border-[#d4af37]/40 shadow-xl'
+        ? 'bg-gradient-to-b from-[#0a0a0f] via-[#050507] to-[#000000] text-white border-[#d4af37]/40 shadow-[0_-20px_50px_rgba(0,0,0,0.95)]'
+        : 'bg-gradient-to-b from-[#f5ece1] via-[#e5d7c6] to-[#dbcab6] text-zinc-900 border-[#d4af37]/40 shadow-xl'
         }`}>
 
         {/* Full-Width Expansive Container (Edge-to-Edge with Generous Luxury Margins) */}
