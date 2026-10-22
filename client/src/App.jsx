@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import AdminDashboard from './AdminDashboard';
+import { API_BASE_URL } from './config/api';
 
 const DEFAULT_SETTINGS = {
   phone: '(216) 92 760 840',
@@ -199,7 +200,7 @@ export default function App() {
 
   // Background fetch to sync with Express API
   useEffect(() => {
-    fetch('http://localhost:5000/api/settings')
+    fetch(`${API_BASE_URL}/api/settings`)
       .then(res => res.json())
       .then(data => {
         if (data?.settings) {
@@ -214,7 +215,7 @@ export default function App() {
     try {
       localStorage.setItem('fakhama_site_settings', JSON.stringify(newSettings));
     } catch (e) { }
-    fetch('http://localhost:5000/api/settings', {
+    fetch(`${API_BASE_URL}/api/settings`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newSettings)
@@ -240,7 +241,7 @@ export default function App() {
     const updated = [item, ...pressOnProducts];
     setPressOnProducts(updated);
     try { localStorage.setItem('fakhama_products', JSON.stringify(updated)); } catch (e) { }
-    fetch('http://localhost:5000/api/products', {
+    fetch(`${API_BASE_URL}/api/products`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(item)
@@ -257,7 +258,7 @@ export default function App() {
     });
     setPressOnProducts(updated);
     try { localStorage.setItem('fakhama_products', JSON.stringify(updated)); } catch (e) { }
-    fetch(`http://localhost:5000/api/products/${id}`, {
+    fetch(`${API_BASE_URL}/api/products/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(updatedFields)
@@ -268,7 +269,7 @@ export default function App() {
     const updated = pressOnProducts.filter(p => p.id !== id);
     setPressOnProducts(updated);
     try { localStorage.setItem('fakhama_products', JSON.stringify(updated)); } catch (e) { }
-    fetch(`http://localhost:5000/api/products/${id}`, {
+    fetch(`${API_BASE_URL}/api/products/${id}`, {
       method: 'DELETE'
     }).catch(() => { });
   };
@@ -328,7 +329,7 @@ export default function App() {
 
   // Sync orders with API
   useEffect(() => {
-    fetch('http://localhost:5000/api/orders')
+    fetch(`${API_BASE_URL}/api/orders`)
       .then(res => res.json())
       .then(data => {
         if (data?.orders && data.orders.length > 0) {
@@ -343,7 +344,7 @@ export default function App() {
     const updated = orders.map(ord => ord.id === orderId ? { ...ord, status: newStatus } : ord);
     setOrders(updated);
     try { localStorage.setItem('fakhama_orders', JSON.stringify(updated)); } catch (e) { }
-    fetch(`http://localhost:5000/api/orders/${orderId}`, {
+    fetch(`${API_BASE_URL}/api/orders/${orderId}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ status: newStatus })
@@ -354,7 +355,7 @@ export default function App() {
     const updated = orders.filter(ord => ord.id !== orderId);
     setOrders(updated);
     try { localStorage.setItem('fakhama_orders', JSON.stringify(updated)); } catch (e) { }
-    fetch(`http://localhost:5000/api/orders/${orderId}`, {
+    fetch(`${API_BASE_URL}/api/orders/${orderId}`, {
       method: 'DELETE'
     }).catch(() => { });
   };
@@ -369,7 +370,7 @@ export default function App() {
     const updated = [orderObj, ...orders];
     setOrders(updated);
     try { localStorage.setItem('fakhama_orders', JSON.stringify(updated)); } catch (e) { }
-    fetch('http://localhost:5000/api/orders', {
+    fetch(`${API_BASE_URL}/api/orders`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(orderObj)
