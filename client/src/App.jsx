@@ -995,9 +995,9 @@ export default function App() {
                   <div className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border shadow-md mb-4 sm:mb-6 ${darkMode ? 'bg-[#141414] border-[#d4af37]/50' : 'bg-white border-[#d4af37]/60 shadow-sm'
                     }`}>
                     <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#d4af37] animate-pulse"></span>
-                    <span className={`text-[0.65rem] xs:text-xs uppercase tracking-[0.16em] sm:tracking-[0.24em] font-extrabold ${darkMode ? 'text-[#ffe08d]' : 'text-amber-900'
+                    <span className={`text-[0.65rem] xs:text-xs uppercase tracking-[0.18em] sm:tracking-[0.24em] font-extrabold ${darkMode ? 'text-[#ffe08d]' : 'text-amber-900'
                       }`}>
-                      Fakhama Nails • SoHo Luxury Sanctuary
+                      {siteSettings.announcement || 'Haute Atelier • SoHo'}
                     </span>
                   </div>
 
