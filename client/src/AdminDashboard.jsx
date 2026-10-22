@@ -205,8 +205,8 @@ export default function AdminDashboard({
           
           {/* Logo & Portal Identity */}
           <div className="flex items-center gap-3.5 shrink-0">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#1c1c1c] to-[#050505] border border-[#d4af37]/60 flex items-center justify-center shadow-lg p-1">
-              <img src="/logo.png" alt="Logo" className="w-full h-full object-contain drop-shadow" />
+            <div className="w-12 h-12 flex items-center justify-center shrink-0">
+              <img src="/logo.png" alt="Logo" className="w-full h-full object-contain drop-shadow-[0_2px_10px_rgba(212,175,55,0.4)]" />
             </div>
             <div>
               <div className="flex items-center gap-2">

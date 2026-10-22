@@ -735,15 +735,11 @@ export default function App() {
             {/* Logo & Brand Identity */}
             <div className="flex items-center gap-2 sm:gap-3.5 shrink-0">
               <a href="#home" onClick={() => setActiveNav('home')} className="flex items-center justify-center shrink-0 group cursor-pointer py-1">
-                <div
-                  style={{ width: '3.25rem', height: '3.25rem', minWidth: '3.25rem', minHeight: '3.25rem' }}
-                  className={`w-12 h-12 sm:w-16 sm:h-16 rounded-2xl ${darkMode ? 'bg-[#141414] border-[#d4af37]/50' : 'bg-white/80 backdrop-blur-md border-[#d4af37]/50 shadow-sm'} border shadow-md flex items-center justify-center p-1.5 shrink-0 overflow-hidden transition-transform duration-300 group-hover:scale-105`}
-                >
+                <div className="w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-105">
                   <img
                     src="/logo.png"
                     alt="Fakhama Nails Logo"
-                    style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }}
-                    className="w-full h-full object-contain drop-shadow-[0_2px_10px_rgba(212,175,55,0.4)]"
+                    className="w-full h-full object-contain drop-shadow-[0_2px_12px_rgba(212,175,55,0.45)]"
                   />
                 </div>
               </a>
@@ -861,15 +857,11 @@ export default function App() {
             darkMode ? 'bg-[#121212] border-white/10' : 'bg-[#f6eee4] border-[#d4af37]/30'
           }`}>
             <div className="flex items-center gap-3">
-              <div className={`w-10 h-10 rounded-full p-1 border flex items-center justify-center shrink-0 shadow-sm ${
-                darkMode
-                  ? 'bg-gradient-to-br from-[#ffe08d]/25 to-transparent border-[#d4af37]/50'
-                  : 'bg-white border-[#d4af37]/60'
-              }`}>
+              <div className="w-10 h-10 flex items-center justify-center shrink-0">
                 <img
                   src="/logo.png"
                   alt="Fakhama Nails Logo"
-                  className="w-full h-full object-contain"
+                  className="w-full h-full object-contain drop-shadow-[0_2px_8px_rgba(212,175,55,0.4)]"
                 />
               </div>
               <div className="flex flex-col">
@@ -2079,15 +2071,11 @@ export default function App() {
             {/* Column 1: Maison Brand & Heritage */}
             <div className="flex flex-col items-start pr-0 lg:pr-4">
               <div className="flex items-center gap-3.5 mb-5 w-auto">
-                <div
-                  style={{ width: '3.75rem', height: '3.75rem', minWidth: '3.75rem', minHeight: '3.75rem', maxWidth: '3.75rem', maxHeight: '3.75rem' }}
-                  className={`w-14 h-14 sm:w-16 sm:h-16 rounded-2xl border shadow-md flex items-center justify-center p-1.5 shrink-0 overflow-hidden ${darkMode ? 'bg-[#141414] border-[#d4af37]/60' : 'bg-white border-[#d4af37]/40 shadow-sm'}`}
-                >
+                <div className="w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center shrink-0 transition-transform duration-300 hover:scale-105">
                   <img
                     src="/logo.png"
                     alt="Fakhama Nails Logo"
-                    style={{ width: '100%', height: '100%', maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }}
-                    className="w-full h-full object-contain drop-shadow-[0_2px_8px_rgba(212,175,55,0.4)]"
+                    className="w-full h-full object-contain drop-shadow-[0_2px_12px_rgba(212,175,55,0.45)]"
                   />
                 </div>
                 <div className="flex flex-col shrink">
