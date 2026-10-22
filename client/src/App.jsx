@@ -25,6 +25,17 @@ const ensureDT = (price) => {
   return s;
 };
 
+// Luxury Haute Couture Hairline Section Divider
+const SectionDivider = ({ darkMode }) => (
+  <div className="w-full flex items-center justify-center py-6 sm:py-10 pointer-events-none select-none" aria-hidden="true">
+    <div className="flex items-center gap-3 sm:gap-4 max-w-[220px] sm:max-w-xs w-full px-4">
+      <div className={`flex-1 h-[1px] bg-gradient-to-r from-transparent ${darkMode ? 'to-[#d4af37]/50' : 'to-[#d4af37]/60'}`}></div>
+      <span className={`text-xs tracking-widest ${darkMode ? 'text-[#ffe08d]' : 'text-amber-800'}`}>✦</span>
+      <div className={`flex-1 h-[1px] bg-gradient-to-l from-transparent ${darkMode ? 'to-[#d4af37]/50' : 'to-[#d4af37]/60'}`}></div>
+    </div>
+  </div>
+);
+
 const INITIAL_SERVICES = [
   {
     id: 1,
@@ -981,9 +992,9 @@ export default function App() {
           {/* SECTION 1: HERO SECTION - Grand Haute Couture Presentation    */}
           {/* ============================================================== */}
           <section className={`relative w-full overflow-hidden transition-colors duration-300 ${darkMode
-            ? 'bg-gradient-to-b from-[#080808] via-[#0c0c0c] to-[#060606] text-white border-[#d4af37]/25'
-            : 'bg-gradient-to-b from-[#fbf7f4] via-[#f7efe7] to-[#f2e7dc] text-[#1a1a1a] border-[#d4af37]/20'
-            } pt-8 sm:pt-12 pb-14 sm:pb-20 lg:pt-16 lg:pb-28 border-b`} id="home">
+            ? 'bg-gradient-to-b from-[#080808] via-[#0c0c0c] to-[#060606] text-white'
+            : 'bg-gradient-to-b from-[#fbf7f4] via-[#f7efe7] to-[#f2e7dc] text-[#1a1a1a]'
+            } pt-12 sm:pt-18 lg:pt-28 pb-20 sm:pb-28 lg:pb-36`} id="home">
             <div className="max-w-[1360px] mx-auto px-4 sm:px-8 lg:px-12 relative z-10">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center">
 
@@ -1030,7 +1041,7 @@ export default function App() {
                 </div>
 
                 {/* Right: Editorial showcase frame with double gold halo & Ambient Glow */}
-                <div className="lg:col-span-5 relative mt-4 lg:mt-0">
+                <div className="lg:col-span-5 relative mt-8 sm:mt-12 lg:mt-0">
                   <div className="relative mx-auto max-w-[340px] xs:max-w-[400px] sm:max-w-[440px] lg:max-w-none">
 
                     {/* Ambient Champagne Gold Luxury Backlight */}
@@ -1100,16 +1111,18 @@ export default function App() {
             </div>
           </section>
 
+          <SectionDivider darkMode={darkMode} />
+
           {/* ============================================================== */}
           {/* SECTION 3: Services & Pricing Showcase ('The Royal Atelier Menu') */}
           {/* ============================================================== */}
-          <section className={`w-full py-12 sm:py-16 lg:py-space-2xl border-b transition-colors duration-300 ${darkMode
-            ? 'bg-gradient-to-b from-[#080808] via-[#0d0d0d] to-[#080808] border-[#d4af37]/25 text-white'
-            : 'bg-gradient-to-b from-[#fbf8f5] to-[#f4ebe2] border-[#d4af37]/20 text-[#1a1a1a]'
+          <section className={`w-full py-16 sm:py-24 lg:py-32 transition-colors duration-500 ${darkMode
+            ? 'bg-gradient-to-b from-[#080808] via-[#0d0d0d] to-[#080808] text-white'
+            : 'bg-gradient-to-b from-[#fbf8f5] to-[#f4ebe2] text-[#1a1a1a]'
             }`} id="services">
             <div className="max-w-[1360px] mx-auto px-4 sm:px-8 lg:px-12">
 
-              <div className="mb-8 sm:mb-space-xl">
+              <div className="mb-10 sm:mb-14">
                 <span className={`font-label-md text-[0.6875rem] sm:text-label-md uppercase tracking-[0.24em] font-bold mb-1.5 sm:mb-2 block ${darkMode ? 'text-[#ffe08d]' : 'text-amber-800'
                   }`}>
                   Haute Couture Offerings
@@ -1121,7 +1134,7 @@ export default function App() {
               </div>
 
               {/* Filter Frame Container with Professional Luxury Border & Styling */}
-              <div className="relative mb-8 sm:mb-10 max-w-full">
+              <div className="relative mb-10 sm:mb-14 max-w-full">
 
                 {/* Mobile Swipe Cue Banner */}
                 <div className="flex sm:hidden items-center justify-between px-2 mb-2">
@@ -1171,7 +1184,7 @@ export default function App() {
               </div>
 
               {/* Service Cards Grid with Creative Haute Couture Palettes in Dark Mode */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 items-stretch pt-4 sm:pt-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7 sm:gap-8 items-stretch pt-6 sm:pt-8">
                 {serviceCards
                   .filter(card => serviceFilter === 'All Royal Rituals' || card.category === serviceFilter)
                   .map((card) => {
@@ -1220,7 +1233,7 @@ export default function App() {
                     return (
                       <div
                         key={card.id}
-                        className={`p-4.5 xs:p-5 sm:p-7 rounded-2xl sm:rounded-3xl max-w-[340px] xs:max-w-[360px] sm:max-w-none mx-auto w-full flex flex-col justify-between group transition-all duration-500 text-white relative transform hover:-translate-y-1.5 ${card.featured ? 'lg:-translate-y-2.5' : ''} ${cardTheme.container}`}
+                        className={`p-5 xs:p-6 sm:p-7 lg:p-8 rounded-2xl sm:rounded-3xl max-w-[360px] xs:max-w-[380px] sm:max-w-none mx-auto w-full flex flex-col justify-between group transition-all duration-500 text-white relative transform hover:-translate-y-1.5 ${card.featured ? 'lg:-translate-y-2.5' : ''} ${cardTheme.container}`}
                       >
                         {/* Specular Highlight Line at the Top of the Card */}
                         <div className="absolute top-0 left-6 right-6 h-[1.5px] bg-gradient-to-r from-transparent via-[#ffe08d]/60 to-transparent pointer-events-none rounded-full"></div>
@@ -1272,7 +1285,7 @@ export default function App() {
 
                         <button
                           onClick={() => handleBooking(card.title)}
-                          className={`w-full py-2.5 sm:py-3.5 rounded-full font-label-md text-xs sm:text-label-md uppercase tracking-wider transition-all duration-300 font-extrabold cursor-pointer transform hover:scale-[1.02] ${cardTheme.button}`}
+                          className={`w-full py-3 sm:py-3.5 rounded-full font-label-md text-xs sm:text-label-md uppercase tracking-wider transition-all duration-300 font-extrabold cursor-pointer transform hover:scale-[1.02] ${cardTheme.button}`}
                         >
                           Select & Book
                         </button>
@@ -1284,14 +1297,16 @@ export default function App() {
             </div>
           </section>
 
+          <SectionDivider darkMode={darkMode} />
+
           {/* ============================================================== */}
           {/* SECTION 4: Lookbook & Nail Art Gallery + Before/After Proof    */}
           {/* ============================================================== */}
-          <section className={`w-full py-12 sm:py-16 lg:py-space-2xl transition-colors duration-500 ${darkMode ? 'bg-[#070707] text-white' : 'bg-[#fcf8f5] text-zinc-900'
+          <section className={`w-full py-16 sm:py-24 lg:py-32 transition-colors duration-500 ${darkMode ? 'bg-[#070707] text-white' : 'bg-[#fcf8f5] text-zinc-900'
             }`} id="lookbook">
             <div className="max-w-[1360px] mx-auto px-4 sm:px-8 lg:px-12">
 
-              <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
+              <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16 lg:mb-20">
                 <span className="font-label-md text-[0.6875rem] sm:text-label-md uppercase tracking-[0.24em] text-[#d4af37] font-bold mb-2 sm:mb-3 block">
                   Artisanal Gallery
                 </span>
@@ -1306,13 +1321,13 @@ export default function App() {
               </div>
 
               {/* Haute Couture Organized Bento Gallery (Tablet 2-1-2-1 / Desktop 8+4, 4+8, 6+6 / Mobile 1-col) */}
-              <div className="mb-12 sm:mb-14">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-5 sm:gap-6 lg:gap-7 items-stretch">
+              <div className="mb-14 sm:mb-20">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 items-stretch">
 
                     {/* ROW 1 — Card 1: Wide Runway Panoramic Feature (Tablet Span 2, Desktop Span 8) */}
                     <div
                       onClick={() => setLightboxItem(galleryItems[0])}
-                      className="group relative rounded-2xl sm:rounded-3xl overflow-hidden col-span-1 md:col-span-2 lg:col-span-8 h-[270px] xs:h-[310px] sm:h-[360px] md:h-[400px] lg:h-[430px] bg-[#0a0a0a] shadow-2xl border border-[#d4af37]/40 cursor-pointer transition-all duration-500 hover:shadow-[0_20px_50px_rgba(212,175,55,0.25)] hover:border-[#ffe08d]"
+                      className="group relative rounded-2xl sm:rounded-3xl overflow-hidden col-span-1 md:col-span-2 lg:col-span-8 h-[340px] xs:h-[380px] sm:h-[400px] md:h-[430px] lg:h-[460px] bg-[#0a0a0a] shadow-2xl border border-[#d4af37]/40 cursor-pointer transition-all duration-500 hover:shadow-[0_20px_50px_rgba(212,175,55,0.25)] hover:border-[#ffe08d]"
                     >
                       <img
                         className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
@@ -1361,7 +1376,7 @@ export default function App() {
                     {/* ROW 1 — Card 2: Editorial Portrait Feature (Tablet Span 1, Desktop Span 4) */}
                     <div
                       onClick={() => setLightboxItem(galleryItems[1])}
-                      className="group relative rounded-2xl sm:rounded-3xl overflow-hidden col-span-1 md:col-span-1 lg:col-span-4 h-[280px] xs:h-[320px] sm:h-[360px] md:h-[390px] lg:h-[430px] bg-[#0a0a0a] shadow-2xl border border-[#d4af37]/40 cursor-pointer transition-all duration-500 hover:shadow-[0_20px_50px_rgba(212,175,55,0.25)] hover:border-[#ffe08d]"
+                      className="group relative rounded-2xl sm:rounded-3xl overflow-hidden col-span-1 md:col-span-1 lg:col-span-4 h-[340px] xs:h-[380px] sm:h-[400px] md:h-[430px] lg:h-[460px] bg-[#0a0a0a] shadow-2xl border border-[#d4af37]/40 cursor-pointer transition-all duration-500 hover:shadow-[0_20px_50px_rgba(212,175,55,0.25)] hover:border-[#ffe08d]"
                     >
                       <img
                         className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
@@ -1404,7 +1419,7 @@ export default function App() {
                     {/* ROW 2 — Card 3: Editorial Portrait Feature (Tablet Span 1, Desktop Span 4) */}
                     <div
                       onClick={() => setLightboxItem(galleryItems[2])}
-                      className="group relative rounded-2xl sm:rounded-3xl overflow-hidden col-span-1 md:col-span-1 lg:col-span-4 h-[280px] xs:h-[320px] sm:h-[360px] md:h-[390px] lg:h-[430px] bg-[#0a0a0a] shadow-2xl border border-[#d4af37]/40 cursor-pointer transition-all duration-500 hover:shadow-[0_20px_50px_rgba(212,175,55,0.25)] hover:border-[#ffe08d]"
+                      className="group relative rounded-2xl sm:rounded-3xl overflow-hidden col-span-1 md:col-span-1 lg:col-span-4 h-[340px] xs:h-[380px] sm:h-[400px] md:h-[430px] lg:h-[460px] bg-[#0a0a0a] shadow-2xl border border-[#d4af37]/40 cursor-pointer transition-all duration-500 hover:shadow-[0_20px_50px_rgba(212,175,55,0.25)] hover:border-[#ffe08d]"
                     >
                       <img
                         className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
@@ -1447,7 +1462,7 @@ export default function App() {
                     {/* ROW 2 — Card 4: Wide Bridal Masterpiece Feature (Tablet Span 2, Desktop Span 8) */}
                     <div
                       onClick={() => setLightboxItem(galleryItems[3])}
-                      className="group relative rounded-2xl sm:rounded-3xl overflow-hidden col-span-1 md:col-span-2 lg:col-span-8 h-[270px] xs:h-[310px] sm:h-[360px] md:h-[400px] lg:h-[430px] bg-[#0a0a0a] shadow-2xl border border-[#d4af37]/45 cursor-pointer transition-all duration-500 hover:shadow-[0_20px_50px_rgba(212,175,55,0.3)] hover:border-[#ffe08d]"
+                      className="group relative rounded-2xl sm:rounded-3xl overflow-hidden col-span-1 md:col-span-2 lg:col-span-8 h-[340px] xs:h-[380px] sm:h-[400px] md:h-[430px] lg:h-[460px] bg-[#0a0a0a] shadow-2xl border border-[#d4af37]/45 cursor-pointer transition-all duration-500 hover:shadow-[0_20px_50px_rgba(212,175,55,0.3)] hover:border-[#ffe08d]"
                     >
                       <img
                         className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
@@ -1494,7 +1509,7 @@ export default function App() {
                     {/* ROW 3 — Card 5: Balanced Studio Canvas (Tablet Span 1, Desktop Span 6) */}
                     <div
                       onClick={() => setLightboxItem(galleryItems[4])}
-                      className="group relative rounded-2xl sm:rounded-3xl overflow-hidden col-span-1 md:col-span-1 lg:col-span-6 h-[260px] xs:h-[300px] sm:h-[340px] md:h-[370px] lg:h-[390px] bg-[#0a0a0a] shadow-2xl border border-[#d4af37]/40 cursor-pointer transition-all duration-500 hover:shadow-[0_20px_50px_rgba(212,175,55,0.25)] hover:border-[#ffe08d]"
+                      className="group relative rounded-2xl sm:rounded-3xl overflow-hidden col-span-1 md:col-span-1 lg:col-span-6 h-[320px] xs:h-[360px] sm:h-[380px] md:h-[400px] lg:h-[430px] bg-[#0a0a0a] shadow-2xl border border-[#d4af37]/40 cursor-pointer transition-all duration-500 hover:shadow-[0_20px_50px_rgba(212,175,55,0.25)] hover:border-[#ffe08d]"
                     >
                       <img
                         className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
@@ -1537,7 +1552,7 @@ export default function App() {
                     {/* ROW 3 — Card 6: Balanced Studio Canvas (Tablet Span 1, Desktop Span 6) */}
                     <div
                       onClick={() => setLightboxItem(galleryItems[5])}
-                      className="group relative rounded-2xl sm:rounded-3xl overflow-hidden col-span-1 md:col-span-1 lg:col-span-6 h-[260px] xs:h-[300px] sm:h-[340px] md:h-[370px] lg:h-[390px] bg-[#0a0a0a] shadow-2xl border border-[#d4af37]/40 cursor-pointer transition-all duration-500 hover:shadow-[0_20px_50px_rgba(212,175,55,0.25)] hover:border-[#ffe08d]"
+                      className="group relative rounded-2xl sm:rounded-3xl overflow-hidden col-span-1 md:col-span-1 lg:col-span-6 h-[320px] xs:h-[360px] sm:h-[380px] md:h-[400px] lg:h-[430px] bg-[#0a0a0a] shadow-2xl border border-[#d4af37]/40 cursor-pointer transition-all duration-500 hover:shadow-[0_20px_50px_rgba(212,175,55,0.25)] hover:border-[#ffe08d]"
                     >
                       <img
                         className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
@@ -1584,7 +1599,7 @@ export default function App() {
               </div>
 
               {/* SPOTLIGHT: Before & After Nail Transformation Trust Card */}
-              <div className={`p-5 sm:p-7 lg:p-10 rounded-2xl sm:rounded-3xl border shadow-2xl transition-all duration-500 ${darkMode
+              <div className={`p-6 sm:p-10 lg:p-14 rounded-2xl sm:rounded-3xl border shadow-2xl transition-all duration-500 mt-14 sm:mt-20 ${darkMode
                 ? 'bg-gradient-to-br from-[#121212] via-[#161616] to-[#0d0d0d] border-[#d4af37]/45 text-white'
                 : 'bg-gradient-to-br from-white via-[#fdfaf7] to-[#f6efe7] border-[#d4af37]/40 text-zinc-900'
                 }`}>
@@ -1641,18 +1656,20 @@ export default function App() {
             </div>
           </section>
 
+          <SectionDivider darkMode={darkMode} />
+
           {/* ============================================================== */}
           {/* SECTION 5: Press-On Nail Atelier (Ready-to-Wear Couture Preview) */}
           {/* ============================================================== */}
-          <section className={`w-full py-12 sm:py-16 lg:py-space-2xl transition-colors duration-500 border-y ${darkMode ? 'bg-[#0a0a0a] border-[#d4af37]/25 text-white' : 'bg-[#f7f0eb] border-[#d4af37]/20 text-zinc-900'
+          <section className={`w-full py-16 sm:py-24 lg:py-32 transition-colors duration-500 ${darkMode ? 'bg-[#0a0a0a] text-white' : 'bg-[#f7f0eb] text-zinc-900'
             }`} id="press-on-shop">
             <div className="max-w-[1360px] mx-auto px-4 sm:px-8 lg:px-12">
-              <div className={`p-5 sm:p-8 lg:p-14 rounded-2xl sm:rounded-3xl backdrop-blur-2xl border transition-all duration-500 ${darkMode
+              <div className={`p-6 sm:p-10 lg:p-16 rounded-2xl sm:rounded-3xl backdrop-blur-2xl border transition-all duration-500 ${darkMode
                 ? 'bg-[#121212]/95 border-[#d4af37]/40 shadow-[0_25px_60px_rgba(0,0,0,0.9)] text-white'
                 : 'bg-white/95 border-[#d4af37]/35 shadow-xl text-zinc-900'
                 }`}>
 
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start lg:items-center mb-8 sm:mb-12">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start lg:items-center mb-10 sm:mb-14">
                   <div className="lg:col-span-8">
                     <span className="font-label-md text-[0.6875rem] sm:text-label-md uppercase tracking-[0.24em] text-[#d4af37] font-bold mb-1.5 sm:mb-2 block">
                       Couture Delivered
@@ -1674,13 +1691,13 @@ export default function App() {
                 </div>
 
                 {/* 3 Product Cards */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
                   {pressOnProducts.map((prod) => (
-                    <div key={prod.id} className={`p-3.5 sm:p-4 rounded-xl sm:rounded-2xl border transition-all duration-300 group shadow-lg ${darkMode
+                    <div key={prod.id} className={`p-5 sm:p-6 rounded-2xl sm:rounded-3xl border transition-all duration-300 group shadow-lg ${darkMode
                       ? 'bg-[#171717] hover:bg-[#1f1f1f] border-[#d4af37]/30 hover:border-[#ffe08d]/70 text-white'
                       : 'bg-white hover:bg-amber-50/40 border-[#d4af37]/25 hover:border-[#d4af37]/70 text-zinc-900'
                       }`}>
-                      <div className="aspect-[4/3] rounded-lg sm:rounded-xl overflow-hidden mb-3.5 sm:mb-4 bg-[#0d0d0d] border border-[#d4af37]/20">
+                      <div className="aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden mb-4 sm:mb-5 bg-[#0d0d0d] border border-[#d4af37]/20">
                         <img className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" alt={prod.title} src={prod.image} />
                       </div>
                       <div className="flex items-center justify-between mb-1">
@@ -1690,13 +1707,13 @@ export default function App() {
                       </div>
                       <p className={`font-body-sm text-xs sm:text-body-sm mb-4 ${darkMode ? 'text-zinc-400' : 'text-zinc-600'
                         }`}>{prod.desc}</p>
-                      <div className={`flex items-center justify-between pt-3 border-t ${darkMode ? 'border-[#d4af37]/20' : 'border-[#d4af37]/15'
+                      <div className={`flex items-center justify-between pt-3.5 border-t ${darkMode ? 'border-[#d4af37]/20' : 'border-[#d4af37]/15'
                         }`}>
                         <span className={`font-label-sm text-[0.65rem] sm:text-label-sm uppercase tracking-wider ${darkMode ? 'text-zinc-500' : 'text-zinc-400'
                           }`}>Reusable 4+ Weeks</span>
                         <button
                           onClick={() => handleAddToCart(prod.title)}
-                          className={`w-8 h-8 rounded-full border flex items-center justify-center transition-all cursor-pointer shadow-sm ${darkMode
+                          className={`w-9 h-9 rounded-full border flex items-center justify-center transition-all cursor-pointer shadow-sm ${darkMode
                             ? 'bg-[#242424] hover:bg-gradient-to-r hover:from-[#ffe08d] hover:to-[#d4af37] text-[#ffe08d] hover:text-black border-[#d4af37]/35'
                             : 'bg-amber-50 hover:bg-gradient-to-r hover:from-[#ffe08d] hover:to-[#d4af37] text-amber-900 hover:text-black border-[#d4af37]/30'
                             }`}
@@ -1713,13 +1730,15 @@ export default function App() {
             </div>
           </section>
 
+          <SectionDivider darkMode={darkMode} />
+
           {/* ============================================================== */}
           {/* SECTION 6: Uncompromising Hygiene & Safety Standards           */}
           {/* ============================================================== */}
-          <section className={`w-full py-12 sm:py-16 lg:py-space-2xl transition-colors duration-500 ${darkMode ? 'bg-[#070707] text-white' : 'bg-[#fcf8f5] text-zinc-900'
+          <section className={`w-full py-16 sm:py-24 lg:py-32 transition-colors duration-500 ${darkMode ? 'bg-[#070707] text-white' : 'bg-[#fcf8f5] text-zinc-900'
             }`} id="hygiene">
             <div className="max-w-[1360px] mx-auto px-4 sm:px-8 lg:px-12">
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-12 lg:gap-16 items-center">
 
                 <div className="lg:col-span-5 flex flex-col">
                   <span className="font-label-md text-[0.6875rem] sm:text-label-md uppercase tracking-[0.24em] text-[#d4af37] font-bold mb-2 sm:mb-3">
@@ -1769,8 +1788,8 @@ export default function App() {
                   </div>
                 </div>
 
-                <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-                  <div className={`p-5 sm:p-7 rounded-2xl sm:rounded-3xl border shadow-lg hover:border-[#ffe08d]/80 transition-all duration-300 ${darkMode ? 'bg-[#121212] border-[#d4af37]/35 text-white' : 'bg-white border-[#d4af37]/25 text-zinc-900'
+                <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6 lg:gap-7">
+                  <div className={`p-6 sm:p-8 rounded-2xl sm:rounded-3xl border shadow-lg hover:border-[#ffe08d]/80 transition-all duration-300 ${darkMode ? 'bg-[#121212] border-[#d4af37]/35 text-white' : 'bg-white border-[#d4af37]/25 text-zinc-900'
                     }`}>
                     <div className={`w-11 h-11 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl border flex items-center justify-center text-[#d4af37] mb-3.5 sm:mb-4 shadow-sm ${darkMode ? 'bg-[#1a1a1a] border-[#d4af37]/40' : 'bg-amber-50 border-[#d4af37]/30'
                       }`}>
@@ -1784,7 +1803,7 @@ export default function App() {
                     </p>
                   </div>
 
-                  <div className={`p-5 sm:p-7 rounded-2xl sm:rounded-3xl border shadow-lg hover:border-[#ffe08d]/80 transition-all duration-300 ${darkMode ? 'bg-[#121212] border-[#d4af37]/35 text-white' : 'bg-white border-[#d4af37]/25 text-zinc-900'
+                  <div className={`p-6 sm:p-8 rounded-2xl sm:rounded-3xl border shadow-lg hover:border-[#ffe08d]/80 transition-all duration-300 ${darkMode ? 'bg-[#121212] border-[#d4af37]/35 text-white' : 'bg-white border-[#d4af37]/25 text-zinc-900'
                     }`}>
                     <div className={`w-11 h-11 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl border flex items-center justify-center text-[#d4af37] mb-3.5 sm:mb-4 shadow-sm ${darkMode ? 'bg-[#1a1a1a] border-[#d4af37]/40' : 'bg-amber-50 border-[#d4af37]/30'
                       }`}>
@@ -1798,7 +1817,7 @@ export default function App() {
                     </p>
                   </div>
 
-                  <div className={`p-5 sm:p-7 rounded-2xl sm:rounded-3xl border shadow-lg hover:border-[#ffe08d]/80 transition-all duration-300 ${darkMode ? 'bg-[#121212] border-[#d4af37]/35 text-white' : 'bg-white border-[#d4af37]/25 text-zinc-900'
+                  <div className={`p-6 sm:p-8 rounded-2xl sm:rounded-3xl border shadow-lg hover:border-[#ffe08d]/80 transition-all duration-300 ${darkMode ? 'bg-[#121212] border-[#d4af37]/35 text-white' : 'bg-white border-[#d4af37]/25 text-zinc-900'
                     }`}>
                     <div className={`w-11 h-11 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl border flex items-center justify-center text-[#d4af37] mb-3.5 sm:mb-4 shadow-sm ${darkMode ? 'bg-[#1a1a1a] border-[#d4af37]/40' : 'bg-amber-50 border-[#d4af37]/30'
                       }`}>
@@ -1812,7 +1831,7 @@ export default function App() {
                     </p>
                   </div>
 
-                  <div className={`p-5 sm:p-7 rounded-2xl sm:rounded-3xl border shadow-lg hover:border-[#ffe08d]/80 transition-all duration-300 ${darkMode ? 'bg-[#121212] border-[#d4af37]/35 text-white' : 'bg-white border-[#d4af37]/25 text-zinc-900'
+                  <div className={`p-6 sm:p-8 rounded-2xl sm:rounded-3xl border shadow-lg hover:border-[#ffe08d]/80 transition-all duration-300 ${darkMode ? 'bg-[#121212] border-[#d4af37]/35 text-white' : 'bg-white border-[#d4af37]/25 text-zinc-900'
                     }`}>
                     <div className={`w-11 h-11 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl border flex items-center justify-center text-[#d4af37] mb-3.5 sm:mb-4 shadow-sm ${darkMode ? 'bg-[#1a1a1a] border-[#d4af37]/40' : 'bg-amber-50 border-[#d4af37]/30'
                       }`}>
@@ -1831,18 +1850,17 @@ export default function App() {
             </div>
           </section>
 
+          <SectionDivider darkMode={darkMode} />
+
           {/* ============================================================== */}
           {/* SECTION 7: Authentic Female Social Proof & Endorsements       */}
           {/* ============================================================== */}
-          {/* ============================================================== */}
-          {/* SECTION 7: Authentic Female Social Proof & Endorsements       */}
-          {/* ============================================================== */}
-          <section className={`w-full py-12 sm:py-16 lg:py-space-2xl transition-colors duration-500 border-y ${darkMode
-            ? 'bg-gradient-to-b from-[#0a0a0a] via-[#0e0e0e] to-[#070707] border-[#d4af37]/25 text-white'
-            : 'bg-gradient-to-b from-[#f8f3ef] via-[#faf6f2] to-[#f4eee8] border-[#d4af37]/20 text-zinc-900'
+          <section className={`w-full py-16 sm:py-24 lg:py-32 transition-colors duration-500 ${darkMode
+            ? 'bg-gradient-to-b from-[#0a0a0a] via-[#0e0e0e] to-[#070707] text-white'
+            : 'bg-gradient-to-b from-[#f8f3ef] via-[#faf6f2] to-[#f4eee8] text-zinc-900'
             }`}>
             <div className="max-w-[1360px] mx-auto px-4 sm:px-8 lg:px-12">
-              <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-space-xl">
+              <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
                 <span className="font-label-md text-[0.6875rem] sm:text-label-md uppercase tracking-[0.24em] text-[#d4af37] font-bold mb-2 sm:mb-3 block">
                   Refined Endorsements
                 </span>
@@ -1856,10 +1874,10 @@ export default function App() {
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
 
                 {/* Review 1 */}
-                <div className={`p-6 sm:p-8 rounded-2xl sm:rounded-3xl border shadow-xl flex flex-col justify-between hover:border-[#ffe08d]/80 transition-all duration-300 ${darkMode
+                <div className={`p-7 sm:p-9 rounded-2xl sm:rounded-3xl border shadow-xl flex flex-col justify-between hover:border-[#ffe08d]/80 transition-all duration-300 ${darkMode
                   ? 'bg-[#131313] border-[#d4af37]/35 text-white hover:shadow-[0_20px_45px_rgba(212,175,55,0.15)]'
                   : 'bg-white border-[#d4af37]/30 text-zinc-900 hover:shadow-xl'
                   }`}>
@@ -1894,7 +1912,7 @@ export default function App() {
                 </div>
 
                 {/* Review 2 */}
-                <div className={`p-6 sm:p-8 rounded-2xl sm:rounded-3xl border shadow-xl flex flex-col justify-between hover:border-[#ffe08d]/80 transition-all duration-300 ${darkMode
+                <div className={`p-7 sm:p-9 rounded-2xl sm:rounded-3xl border shadow-xl flex flex-col justify-between hover:border-[#ffe08d]/80 transition-all duration-300 ${darkMode
                   ? 'bg-[#131313] border-[#d4af37]/35 text-white hover:shadow-[0_20px_45px_rgba(212,175,55,0.15)]'
                   : 'bg-white border-[#d4af37]/30 text-zinc-900 hover:shadow-xl'
                   }`}>
@@ -1929,7 +1947,7 @@ export default function App() {
                 </div>
 
                 {/* Review 3 */}
-                <div className={`p-6 sm:p-8 rounded-2xl sm:rounded-3xl border shadow-xl flex flex-col justify-between hover:border-[#ffe08d]/80 transition-all duration-300 ${darkMode
+                <div className={`p-7 sm:p-9 rounded-2xl sm:rounded-3xl border shadow-xl flex flex-col justify-between hover:border-[#ffe08d]/80 transition-all duration-300 ${darkMode
                   ? 'bg-[#131313] border-[#d4af37]/35 text-white hover:shadow-[0_20px_45px_rgba(212,175,55,0.15)]'
                   : 'bg-white border-[#d4af37]/30 text-zinc-900 hover:shadow-xl'
                   }`}>
@@ -1967,17 +1985,16 @@ export default function App() {
             </div>
           </section>
 
+          <SectionDivider darkMode={darkMode} />
+
           {/* ============================================================== */}
           {/* SECTION 8: VIP Concierge & Atelier Visit Banner                */}
           {/* ============================================================== */}
-          {/* ============================================================== */}
-          {/* SECTION 8: VIP Concierge & Atelier Visit Banner                */}
-          {/* ============================================================== */}
-          <section className={`w-full py-12 sm:py-16 lg:py-space-2xl transition-colors duration-500 ${darkMode ? 'bg-[#070707] text-white' : 'bg-[#fcf8f5] text-zinc-900'
+          <section className={`w-full py-16 sm:py-24 lg:py-32 transition-colors duration-500 ${darkMode ? 'bg-[#070707] text-white' : 'bg-[#fcf8f5] text-zinc-900'
             }`} id="sanctuary">
             <div className="max-w-[1360px] mx-auto px-4 sm:px-8 lg:px-12">
-              <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-gradient-to-br from-[#141414] via-[#181818] to-[#0d0d0d] p-6 sm:p-10 lg:p-16 border border-[#d4af37]/50 shadow-[0_25px_60px_rgba(0,0,0,0.95)]">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+              <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-gradient-to-br from-[#141414] via-[#181818] to-[#0d0d0d] p-7 sm:p-12 lg:p-20 border border-[#d4af37]/50 shadow-[0_25px_60px_rgba(0,0,0,0.95)]">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
 
                   <div className="lg:col-span-8">
                     <span className="font-label-sm text-[0.6875rem] sm:text-label-sm uppercase tracking-[0.24em] text-[#d4af37] font-bold mb-2 sm:mb-3 block">
@@ -1990,16 +2007,16 @@ export default function App() {
                       Discreetly positioned on the second floor in the heart of SoHo. Indulge in complimentary champagne, botanical herbal infusions, and bespoke couture manicures.
                     </p>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 font-body-sm text-xs sm:text-body-sm text-white mb-8">
-                      <div className="p-3.5 rounded-xl bg-[#1f1f1f]/80 border border-[#d4af37]/25 shadow-sm">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 font-body-sm text-xs sm:text-body-sm text-white mb-10">
+                      <div className="p-4 sm:p-5 rounded-2xl bg-[#1f1f1f]/80 border border-[#d4af37]/25 shadow-sm">
                         <span className="font-bold block text-[#ffe08d] text-xs uppercase tracking-wider mb-1">Tuesday – Saturday</span>
                         <span className="text-zinc-300">10:00 AM – 8:00 PM</span>
                       </div>
-                      <div className="p-3.5 rounded-xl bg-[#1f1f1f]/80 border border-[#d4af37]/25 shadow-sm">
+                      <div className="p-4 sm:p-5 rounded-2xl bg-[#1f1f1f]/80 border border-[#d4af37]/25 shadow-sm">
                         <span className="font-bold block text-[#ffe08d] text-xs uppercase tracking-wider mb-1">Sunday</span>
                         <span className="text-zinc-300">9:30 AM – 7:00 PM</span>
                       </div>
-                      <div className="p-3.5 rounded-xl bg-[#1f1f1f]/80 border border-[#d4af37]/25 shadow-sm">
+                      <div className="p-4 sm:p-5 rounded-2xl bg-[#1f1f1f]/80 border border-[#d4af37]/25 shadow-sm">
                         <span className="font-bold block text-[#ffe08d] text-xs uppercase tracking-wider mb-1">Private VIP Suites</span>
                         <span className="text-zinc-300">Available upon request</span>
                       </div>
@@ -2039,14 +2056,15 @@ export default function App() {
             </div>
           </section>
 
+          <SectionDivider darkMode={darkMode} />
+
         </div>
       </main>
 
       {/* ============================================================== */}
-      {/* ============================================================== */}
       {/* EXPANSIVE FULL-WIDTH HAUTE COUTURE FOOTER                      */}
       {/* ============================================================== */}
-      <footer className={`w-full transition-colors duration-500 pt-12 sm:pt-16 lg:pt-20 pb-8 sm:pb-12 border-t-2 relative ${darkMode
+      <footer className={`w-full transition-colors duration-500 pt-16 sm:pt-24 lg:pt-28 pb-12 sm:pb-16 border-t-2 relative ${darkMode
         ? 'bg-gradient-to-b from-[#0a0a0a] via-[#050505] to-[#000000] text-white border-[#d4af37]/40 shadow-[0_-20px_50px_rgba(0,0,0,0.95)]'
         : 'bg-gradient-to-b from-[#fcf9f6] via-[#f7f1eb] to-[#efe6dc] text-zinc-900 border-[#d4af37]/40 shadow-xl'
         }`}>
