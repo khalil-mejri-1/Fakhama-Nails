@@ -202,22 +202,40 @@ app.delete('/api/orders/:id', (req, res) => {
   res.json({ success: true, message: 'Commande supprimée avec succès' });
 });
 
-// Connect to MongoDB Atlas (Graceful Fallback)
+// Connect to MongoDB Atlas (Graceful Fallback & Serverless Connection Re-use)
+let isConnected = false;
 const connectDB = async () => {
+  if (isConnected || mongoose.connection.readyState >= 1) {
+    return;
+  }
   try {
     if (!MONGODB_URI || MONGODB_URI.includes('<username>')) {
       console.warn('⚠️  MONGODB_URI is not configured yet with valid credentials in .env (Running in in-memory mode)');
       return;
     }
     await mongoose.connect(MONGODB_URI);
+    isConnected = true;
     console.log('✅ Connected to MongoDB Atlas successfully');
   } catch (error) {
     console.error('❌ MongoDB Atlas connection error:', error.message);
   }
 };
 
-// Start Server
-app.listen(PORT, async () => {
-  console.log(`🚀 Server is running on: http://localhost:${PORT}`);
-  await connectDB();
+// Middleware to ensure DB connection on serverless invocations (e.g., Vercel)
+app.use(async (req, res, next) => {
+  if (mongoose.connection.readyState === 0 && MONGODB_URI && !MONGODB_URI.includes('<username>')) {
+    await connectDB();
+  }
+  next();
 });
+
+// Start Server locally if not running in serverless environment
+if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+  app.listen(PORT, async () => {
+    console.log(`🚀 Server is running on: http://localhost:${PORT}`);
+    await connectDB();
+  });
+}
+
+// Export for Vercel Serverless Function
+export default app;
