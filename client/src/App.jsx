@@ -991,7 +991,7 @@ export default function App() {
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center">
 
                 {/* Left: Refined luxury copy */}
-                <div className="lg:col-span-7 flex flex-col items-start pr-0 lg:pr-8">
+                <div className="order-2 lg:order-1 lg:col-span-7 flex flex-col items-start pr-0 lg:pr-8">
                   <div className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border shadow-md mb-4 sm:mb-6 ${darkMode ? 'bg-[#141414] border-[#d4af37]/50' : 'bg-white border-[#d4af37]/60 shadow-sm'
                     }`}>
                     <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#d4af37] animate-pulse"></span>
@@ -1033,7 +1033,7 @@ export default function App() {
                 </div>
 
                 {/* Right: Editorial showcase frame with double gold halo & Ambient Glow */}
-                <div className="lg:col-span-5 relative mt-8 sm:mt-12 lg:mt-0">
+                <div className="order-1 lg:order-2 lg:col-span-5 relative mb-8 sm:mb-10 lg:mb-0">
                   <div className="relative mx-auto max-w-[340px] xs:max-w-[400px] sm:max-w-[440px] lg:max-w-none">
 
                     {/* Ambient Champagne Gold Luxury Backlight */}
