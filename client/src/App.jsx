@@ -1106,7 +1106,7 @@ export default function App() {
             }`} id="services">
             <div className="max-w-[1360px] mx-auto px-4 sm:px-8 lg:px-12">
 
-              <div className="mb-10 sm:mb-14">
+              <div className="mb-6 sm:mb-10">
                 <span className={`font-label-md text-[0.6875rem] sm:text-label-md uppercase tracking-[0.24em] font-bold mb-1.5 sm:mb-2 block ${darkMode ? 'text-[#ffe08d]' : 'text-amber-800'
                   }`}>
                   Haute Couture Offerings
@@ -1118,10 +1118,10 @@ export default function App() {
               </div>
 
               {/* Filter Frame Container with Professional Luxury Border & Styling */}
-              <div className="relative mb-10 sm:mb-14 max-w-full">
+              <div className="relative mb-3 sm:mb-6 max-w-full">
 
                 {/* Mobile Swipe Cue Banner */}
-                <div className="flex sm:hidden items-center justify-between px-2 mb-2">
+                <div className="flex sm:hidden items-center justify-between px-2 mb-1.5">
                   <span className={`text-[0.6875rem] font-bold uppercase tracking-wider ${darkMode ? 'text-[#ffe08d]' : 'text-amber-800'}`}>
                     Filter Rituals
                   </span>
@@ -1168,7 +1168,7 @@ export default function App() {
               </div>
 
               {/* Service Cards Grid with Creative Haute Couture Palettes in Dark Mode */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7 sm:gap-8 items-stretch pt-6 sm:pt-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-7 lg:gap-8 items-stretch pt-2 sm:pt-4">
                 {serviceCards
                   .filter(card => serviceFilter === 'All Royal Rituals' || card.category === serviceFilter)
                   .map((card) => {
