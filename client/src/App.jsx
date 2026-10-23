@@ -1609,34 +1609,65 @@ export default function App() {
                   ))}
                 </div>
 
-                {/* Clinical Guarantee Bottom Trust Bar */}
-                <div className={`mt-8 p-4 sm:p-6 rounded-2xl border flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6 ${darkMode ? 'bg-[#0f0d14]/90 border-[#d4af37]/30' : 'bg-white/90 border-[#d4af37]/30'
-                  }`}>
-                  <div className="grid grid-cols-2 gap-4 w-full md:w-auto">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-[#ffe08d]/10 border border-[#d4af37]/40 flex items-center justify-center shrink-0">
-                        <span className="font-bold text-[#d4af37] text-sm">0%</span>
+                {/* Clinical Guarantee Bottom Trust Bar - Haute Atelier Design */}
+                <div className={`mt-6 sm:mt-10 p-4 xs:p-5 sm:p-6 lg:p-7 rounded-2xl sm:rounded-3xl border flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4 sm:gap-6 shadow-xl relative overflow-hidden backdrop-blur-md ${
+                  darkMode
+                    ? 'bg-gradient-to-br from-[#15121e]/95 via-[#1a1725]/95 to-[#100e16]/95 border-[#d4af37]/40 shadow-[0_15px_45px_rgba(0,0,0,0.65)]'
+                    : 'bg-gradient-to-br from-white/95 via-[#fcf8f3]/95 to-[#f6efe7]/95 border-[#d4af37]/35 shadow-[0_15px_40px_rgba(212,175,55,0.12)]'
+                }`}>
+                  {/* Specular Highlight Line at the Top */}
+                  <div className="absolute top-0 left-6 right-6 h-[1.5px] bg-gradient-to-r from-transparent via-[#ffe08d]/60 to-transparent pointer-events-none rounded-full"></div>
+
+                  {/* Two Clinical Proof Tiles */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 w-full lg:w-auto flex-1">
+                    {/* Stat 1 */}
+                    <div className={`p-3.5 sm:p-4 rounded-xl sm:rounded-2xl border flex items-center gap-3.5 transition-all duration-300 hover:border-[#ffe08d]/60 ${
+                      darkMode
+                        ? 'bg-white/[0.04] border-[#d4af37]/25 hover:bg-white/[0.07]'
+                        : 'bg-white/80 border-[#d4af37]/30 hover:bg-white'
+                    }`}>
+                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#ffe08d]/25 via-[#d4af37]/15 to-transparent border border-[#d4af37]/50 flex items-center justify-center shrink-0 shadow-inner">
+                        <span className="font-display-hero text-lg font-bold text-[#d4af37]">0%</span>
                       </div>
-                      <div>
-                        <div className="font-bold text-xs sm:text-sm text-[#d4af37]">0% Lifting Guarantee</div>
-                        <p className={`text-[0.6875rem] sm:text-xs ${darkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>Flawless cuticle edge for 4-6 weeks</p>
+                      <div className="min-w-0">
+                        <div className={`font-bold text-xs sm:text-sm tracking-tight ${darkMode ? 'text-white' : 'text-zinc-900'}`}>
+                          0% Lifting Guarantee
+                        </div>
+                        <p className={`text-[0.6875rem] sm:text-xs leading-snug mt-0.5 ${darkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>
+                          Flawless cuticle edge for 4–6 weeks
+                        </p>
                       </div>
                     </div>
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-[#ffe08d]/10 border border-[#d4af37]/40 flex items-center justify-center shrink-0">
-                        <span className="font-bold text-[#d4af37] text-sm">100%</span>
+
+                    {/* Stat 2 */}
+                    <div className={`p-3.5 sm:p-4 rounded-xl sm:rounded-2xl border flex items-center gap-3.5 transition-all duration-300 hover:border-[#ffe08d]/60 ${
+                      darkMode
+                        ? 'bg-white/[0.04] border-[#d4af37]/25 hover:bg-white/[0.07]'
+                        : 'bg-white/80 border-[#d4af37]/30 hover:bg-white'
+                    }`}>
+                      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#ffe08d]/25 via-[#d4af37]/15 to-transparent border border-[#d4af37]/50 flex items-center justify-center shrink-0 shadow-inner">
+                        <span className="font-display-hero text-sm font-bold text-[#d4af37]">100%</span>
                       </div>
-                      <div>
-                        <div className="font-bold text-xs sm:text-sm text-[#d4af37]">100% Intact Plate</div>
-                        <p className={`text-[0.6875rem] sm:text-xs ${darkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>Protected natural keratin structure</p>
+                      <div className="min-w-0">
+                        <div className={`font-bold text-xs sm:text-sm tracking-tight ${darkMode ? 'text-white' : 'text-zinc-900'}`}>
+                          100% Intact Natural Plate
+                        </div>
+                        <p className={`text-[0.6875rem] sm:text-xs leading-snug mt-0.5 ${darkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>
+                          Protected botanical keratin structure
+                        </p>
                       </div>
                     </div>
                   </div>
+
+                  {/* Primary CTA Button */}
                   <a
                     href="#services"
-                    className="w-full md:w-auto px-6 py-3.5 rounded-full bg-gradient-to-r from-[#ffe08d] via-[#d4af37] to-[#b38f26] text-black font-label-md text-xs sm:text-sm uppercase tracking-wider font-extrabold hover:brightness-110 transition-all shadow-md text-center shrink-0"
+                    className="w-full lg:w-auto px-7 py-3.5 sm:py-4 rounded-full bg-gradient-to-r from-[#ffe08d] via-[#d4af37] to-[#b38f26] text-black font-label-md text-xs sm:text-sm uppercase tracking-widest font-black hover:brightness-110 hover:shadow-[0_0_30px_rgba(212,175,55,0.45)] transition-all duration-300 shadow-md text-center shrink-0 border border-[#fff2b2] flex items-center justify-center gap-2 group/cta cursor-pointer"
                   >
-                    Reserve Transformation Ritual
+                    <span>Reserve Transformation Ritual</span>
+                    <span className="material-symbols-outlined text-base transition-transform duration-300 group-hover/cta:translate-x-1">
+                      arrow_forward
+                    </span>
                   </a>
                 </div>
               </div>
