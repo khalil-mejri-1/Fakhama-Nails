@@ -409,6 +409,24 @@ export default function App() {
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [newsletterSubscribed, setNewsletterSubscribed] = useState(false);
 
+  // Before & After Transformation Carousel State
+  const [transIndex, setTransIndex] = useState(0);
+  const [transTouchStart, setTransTouchStart] = useState(null);
+  const [transTouchEnd, setTransTouchEnd] = useState(null);
+  const [isDesktop, setIsDesktop] = useState(() => typeof window !== 'undefined' && window.innerWidth >= 1024);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const desktop = window.innerWidth >= 1024;
+      setIsDesktop(desktop);
+      if (desktop && transIndex > 2) {
+        setTransIndex(2);
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [transIndex]);
+
   // Theme State: Dark Mode / Light Mode with localStorage persistence
   const [darkMode, setDarkMode] = useState(() => {
     try {
@@ -579,6 +597,89 @@ export default function App() {
       image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDFlAZiF3vB9tcZ4EqWIH9MtTYo6IdQUlU1pJYLVbgG9yYNuP7PqJJwo5tYy0s75nN4YLwjLLIIY6J-FwkL8gK0BzdvoxlUbzps989uSixiEMQuoRLi-n8qdKzpB3WjNgwjEccxccUY4S5UaQxVrZGrWyalsfuH-7NksRVBGrzsckRott2hubpo3Xgz2vTw7-dunMbUxdzbynH8oXbXpsFWaHPM3C30d5DxlQRIHfzN3sjFWRkjKmS6'
     }
   ];
+
+  // Case Studies for Before & After Carousel Showcase
+  const transformationSlides = [
+    {
+      id: 1,
+      tag: 'CASE 01 • SOFT GEL ARCHITECTURE',
+      title: 'Apres Gel-X Sculpted Almond',
+      subtitle: 'Zero-Damage Soft Gel Architecture',
+      duration: '4-Week Growth Check',
+      statBadge: '6-Week Retention',
+      statSub: '0% Lifting or Peeling',
+      description: 'Severe natural plate fragility and split lateral walls restored into architectural almond extensions with iridescent glazed chrome finish.',
+      image: '/transformations/trans_gelx.jpg',
+      alt: 'Before and after Apres Gel-X sculpted almond transformation'
+    },
+    {
+      id: 2,
+      tag: 'CASE 02 • DRY E-FILE RUSSIAN',
+      title: 'Signature Russian E-File Apex',
+      subtitle: 'Diamond Grit Cuticle Detailing & Apex Alignment',
+      duration: '5-Week Growth Check',
+      statBadge: '100% Plate Integrity',
+      statSub: 'Gentle Botanical Conditioning',
+      description: 'Severe ridging, thin nail beds, and rough keratin buildup gently smoothed with dry diamond micro-bits and reinforced with Japanese builder gel.',
+      image: '/transformations/trans_russian.jpg',
+      alt: 'Before and after Signature Russian E-File Apex transformation'
+    },
+    {
+      id: 3,
+      tag: 'CASE 03 • 3D HAUTE COUTURE',
+      title: 'Haute 3D Chrome & Gilded Sculpting',
+      subtitle: 'Runway Crystal Relief & Metallic Mirror Finishing',
+      duration: '4-Week Growth Check',
+      statBadge: 'Handcrafted Artistry',
+      statSub: 'Swarovski & 24K Leaf Encapsulated',
+      description: 'Bitten, uneven short nails elevated into runway-level statement art with sculpted 3D baroque gold reliefs and hand-placed crystals.',
+      image: '/transformations/trans_chrome.jpg',
+      alt: 'Before and after Haute 3D Chrome and Gilded Sculpting transformation'
+    },
+    {
+      id: 4,
+      tag: 'CASE 04 • RESTORATIVE THERAPY',
+      title: 'Royal Rose Petal & Keratin Recovery',
+      subtitle: 'Paraffin Restorative Therapy & Deep Cuticle Care',
+      duration: '6-Week Growth Check',
+      statBadge: 'Clinical Health Guarantee',
+      statSub: 'Damascus Rose Soak & Volcanic Scrub',
+      description: 'Damaged, chemically stripped acrylic trauma reconstructed with organic camellia oil, vitamin keratin base, and smooth nude polish.',
+      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBIe2HiI78nSY8QurPYxN36-cOXYmxSPxIvl2qt8H4l84awN3-WxNlJR6kG_rdOCWs5HVu64HYiooMLDoKcMdB9IQF31dcOxfYYkp6a6rPPyqtGRElNnWiX0S-po7tzUuFLJmdat0VTgPCrcRo-nvhOCB6w--TXswvP8wGa7l5ibr8I2NMRGiGDV65m97DRHXwyVI7NDiPw1mf5Zg4HsS8FOl7V7L32Rco7XCEyiOyaXEnFpvIPzdlw',
+      alt: 'Before and after Royal Rose Petal and Keratin Recovery transformation'
+    }
+  ];
+
+  const handleTransNext = () => {
+    const maxIdx = isDesktop ? 2 : 3;
+    setTransIndex(prev => (prev >= maxIdx ? 0 : prev + 1));
+  };
+
+  const handleTransPrev = () => {
+    const maxIdx = isDesktop ? 2 : 3;
+    setTransIndex(prev => (prev <= 0 ? maxIdx : prev - 1));
+  };
+
+  const handleTransTouchStart = (e) => {
+    setTransTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTransTouchMove = (e) => {
+    setTransTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTransTouchEnd = () => {
+    if (!transTouchStart || !transTouchEnd) return;
+    const distance = transTouchStart - transTouchEnd;
+    const maxIdx = isDesktop ? 2 : 3;
+    if (distance > 50) {
+      setTransIndex(prev => (prev >= maxIdx ? 0 : prev + 1));
+    } else if (distance < -50) {
+      setTransIndex(prev => (prev <= 0 ? maxIdx : prev - 1));
+    }
+    setTransTouchStart(null);
+    setTransTouchEnd(null);
+  };
 
   // =========================================================================
   // ROUTING: IF CURRENT ROUTE IS /admin, RENDER THE LUXURY ADMIN DASHBOARD
@@ -1362,58 +1463,195 @@ export default function App() {
                 </div>
               </div>
 
-              {/* SPOTLIGHT: Before & After Nail Transformation Trust Card */}
-              <div className={`p-6 sm:p-10 lg:p-14 rounded-2xl sm:rounded-3xl border shadow-2xl transition-all duration-500 mt-14 sm:mt-20 ${darkMode
-                ? 'bg-gradient-to-br from-[#121212] via-[#161616] to-[#0d0d0d] border-[#d4af37]/45 text-white'
-                : 'bg-gradient-to-br from-white via-[#fdfaf7] to-[#f6efe7] border-[#d4af37]/40 text-zinc-900'
-                }`}>
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
-                  <div className="lg:col-span-6 relative rounded-2xl overflow-hidden border border-[#d4af37]/40 shadow-xl">
-                    <img
-                      alt="Split comparison before and after nail transformation: damaged short brittle bare nails vs flawless Russian manicure"
-                      className="w-full h-auto object-cover max-h-[260px] xs:max-h-[300px] sm:max-h-[380px] lg:max-h-[480px]"
-                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIe2HiI78nSY8QurPYxN36-cOXYmxSPxIvl2qt8H4l84awN3-WxNlJR6kG_rdOCWs5HVu64HYiooMLDoKcMdB9IQF31dcOxfYYkp6a6rPPyqtGRElNnWiX0S-po7tzUuFLJmdat0VTgPCrcRo-nvhOCB6w--TXswvP8wGa7l5ibr8I2NMRGiGDV65m97DRHXwyVI7NDiPw1mf5Zg4HsS8FOl7V7L32Rco7XCEyiOyaXEnFpvIPzdlw"
-                    />
-                    <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-black/80 backdrop-blur-md text-white font-label-sm text-[0.625rem] sm:text-[0.6875rem] tracking-wider uppercase font-medium border border-white/20 shadow-sm">
-                      Before
-                    </div>
-                    <div className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-gradient-to-r from-[#ffe08d] via-[#d4af37] to-[#b38f26] border border-[#ffe08d]/60 backdrop-blur-md text-black font-label-sm text-[0.625rem] sm:text-[0.6875rem] tracking-wider uppercase font-bold shadow-md">
-                      After
-                    </div>
-                  </div>
-
-                  <div className="lg:col-span-6 flex flex-col justify-center lg:pl-4">
-                    <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1 rounded-full bg-[#ffe08d]/10 text-[#d4af37] border border-[#d4af37]/30 font-label-sm text-[0.6875rem] sm:text-xs font-bold tracking-widest uppercase mb-2 sm:mb-3 w-fit">
+              {/* SPOTLIGHT: Creative Haute Couture Before & After Carousel Showcase */}
+              <div className={`p-5 sm:p-8 lg:p-12 rounded-2xl sm:rounded-3xl border shadow-2xl transition-all duration-500 mt-14 sm:mt-20 overflow-hidden ${
+                darkMode
+                  ? 'bg-gradient-to-br from-[#121118] via-[#161420] to-[#0d0c14] border-[#d4af37]/45 text-white'
+                  : 'bg-gradient-to-br from-white via-[#fcf8f4] to-[#f7f0e8] border-[#d4af37]/40 text-zinc-900'
+              }`}>
+                {/* Header row with Title and Navigation Arrow Buttons */}
+                <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 sm:mb-8">
+                  <div>
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#ffe08d]/10 text-[#d4af37] border border-[#d4af37]/30 font-label-sm text-[0.6875rem] sm:text-xs font-bold tracking-widest uppercase mb-2">
                       <span className="material-symbols-outlined text-sm text-[#d4af37]">verified</span> Clinical Health Guarantee
                     </div>
-                    <h3 className={`font-headline-md text-xl sm:text-2xl lg:text-headline-md mb-2 sm:mb-3 font-semibold tracking-tight ${darkMode ? 'text-white' : 'text-zinc-900'
-                      }`}>
-                      6-Week Retention Without Plate Damage
+                    <h3 className={`font-headline-md text-2xl sm:text-3xl font-semibold tracking-tight ${darkMode ? 'text-white' : 'text-zinc-900'}`}>
+                      Before & After Transformation Atelier
                     </h3>
-                    <p className={`font-body-md text-sm sm:text-body-md mb-5 sm:mb-6 leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-600'
-                      }`}>
-                      See how our non-invasive dry e-file manicure gently removes keratin buildup while strengthening weak, brittle nails. Zero aggressive filing, zero peeling, and 100% breathable Japanese builder structure.
+                    <p className={`font-body-md text-xs sm:text-sm max-w-xl mt-1.5 ${darkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>
+                      Restorative Russian e-file sculpting & structured Japanese builder gel — witness real case studies of brittle plates transformed into pristine haute couture sets.
                     </p>
-                    <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-6">
-                      <div className={`p-3.5 sm:p-4 rounded-xl sm:rounded-2xl border shadow-inner ${darkMode ? 'bg-[#181818]/90 border-[#d4af37]/35 text-white' : 'bg-white/80 border-[#d4af37]/30 text-zinc-900'
+                  </div>
+
+                  {/* Carousel Controls */}
+                  <div className="flex items-center gap-2 self-start sm:self-end shrink-0">
+                    <button
+                      onClick={handleTransPrev}
+                      aria-label="Previous Transformation"
+                      className={`w-10 h-10 sm:w-11 sm:h-11 rounded-full border flex items-center justify-center transition-all duration-300 cursor-pointer ${
+                        darkMode
+                          ? 'bg-white/5 border-[#d4af37]/40 text-white hover:bg-[#d4af37] hover:text-black hover:border-[#ffe08d] shadow-md active:scale-95'
+                          : 'bg-white border-[#d4af37]/50 text-zinc-800 hover:bg-[#d4af37] hover:text-white hover:border-[#ffe08d] shadow-sm active:scale-95'
+                      }`}
+                    >
+                      <span className="material-symbols-outlined text-lg">chevron_left</span>
+                    </button>
+                    <button
+                      onClick={handleTransNext}
+                      aria-label="Next Transformation"
+                      className={`w-10 h-10 sm:w-11 sm:h-11 rounded-full border flex items-center justify-center transition-all duration-300 cursor-pointer ${
+                        darkMode
+                          ? 'bg-white/5 border-[#d4af37]/40 text-white hover:bg-[#d4af37] hover:text-black hover:border-[#ffe08d] shadow-md active:scale-95'
+                          : 'bg-white border-[#d4af37]/50 text-zinc-800 hover:bg-[#d4af37] hover:text-white hover:border-[#ffe08d] shadow-sm active:scale-95'
+                      }`}
+                    >
+                      <span className="material-symbols-outlined text-lg">chevron_right</span>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Carousel Track with smooth sliding and touch swipe support */}
+                <div
+                  className="overflow-hidden -mx-2 sm:-mx-3"
+                  onTouchStart={handleTransTouchStart}
+                  onTouchMove={handleTransTouchMove}
+                  onTouchEnd={handleTransTouchEnd}
+                >
+                  <div
+                    className="flex transition-transform duration-500 ease-out"
+                    style={{
+                      transform: `translateX(-${transIndex * (isDesktop ? 50 : 100)}%)`
+                    }}
+                  >
+                    {transformationSlides.map((slide) => (
+                      <div
+                        key={slide.id}
+                        className="w-full lg:w-1/2 flex-shrink-0 px-2 sm:px-3"
+                      >
+                        <div className={`h-full rounded-2xl sm:rounded-3xl border overflow-hidden transition-all duration-500 flex flex-col justify-between shadow-xl group ${
+                          darkMode
+                            ? 'bg-gradient-to-b from-[#1a1824] via-[#14121c] to-[#0c0a12] border-[#d4af37]/35 shadow-[0_15px_40px_rgba(0,0,0,0.6)]'
+                            : 'bg-white border-[#d4af37]/35 shadow-[0_15px_40px_rgba(212,175,55,0.12)]'
                         }`}>
-                        <div className="font-headline-sm text-lg sm:text-xl font-bold text-[#d4af37] mb-1">0% Lifting</div>
-                        <p className={`text-[0.7rem] sm:text-xs ${darkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>Flawless seamless cuticle edge for 4 to 6 weeks</p>
+                          {/* Image Split Showcase with BEFORE and AFTER Pills */}
+                          <div className="relative aspect-[16/10] w-full overflow-hidden bg-black shrink-0 border-b border-[#d4af37]/30">
+                            <img
+                              src={slide.image}
+                              alt={slide.alt}
+                              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                              loading="lazy"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none"></div>
+
+                            {/* Top Case Tag */}
+                            <div className="absolute top-2.5 left-2.5 sm:top-3.5 sm:left-3.5 z-10">
+                              <span className="px-2.5 py-1 rounded-full bg-black/85 backdrop-blur-md border border-[#d4af37]/50 text-[#ffe08d] font-label-sm text-[0.6rem] sm:text-xs font-bold tracking-wider uppercase shadow-md">
+                                {slide.tag}
+                              </span>
+                            </div>
+
+                            {/* BEFORE Badge on Left */}
+                            <div className="absolute bottom-2.5 left-2.5 sm:bottom-3.5 sm:left-3.5 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-black/85 backdrop-blur-md text-white font-label-sm text-[0.625rem] sm:text-[0.6875rem] tracking-wider uppercase font-medium border border-white/20 shadow-md">
+                              Before
+                            </div>
+
+                            {/* AFTER Badge on Right */}
+                            <div className="absolute bottom-2.5 right-2.5 sm:bottom-3.5 sm:right-3.5 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-gradient-to-r from-[#ffe08d] via-[#d4af37] to-[#b38f26] border border-[#ffe08d]/60 backdrop-blur-md text-black font-label-sm text-[0.625rem] sm:text-[0.6875rem] tracking-wider uppercase font-bold shadow-md">
+                              After
+                            </div>
+                          </div>
+
+                          {/* Card Content & Details */}
+                          <div className="p-4 sm:p-6 flex flex-col flex-grow justify-between">
+                            <div>
+                              <div className="flex items-center justify-between gap-2 mb-2">
+                                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#ffe08d]/10 text-[#d4af37] border border-[#d4af37]/30 text-[0.625rem] sm:text-xs font-bold uppercase tracking-wider">
+                                  <span className="material-symbols-outlined text-xs text-[#d4af37]">verified</span>
+                                  {slide.statBadge}
+                                </span>
+                                <span className={`text-[0.65rem] sm:text-xs font-medium tracking-wide ${darkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>
+                                  {slide.duration}
+                                </span>
+                              </div>
+
+                              <h4 className={`text-base sm:text-lg font-bold mb-1 leading-snug font-display-hero ${darkMode ? 'text-white' : 'text-zinc-900'}`}>
+                                {slide.title}
+                              </h4>
+                              <p className={`text-[0.7rem] sm:text-xs font-semibold mb-2 ${darkMode ? 'text-[#ffe08d]' : 'text-amber-800'}`}>
+                                {slide.subtitle}
+                              </p>
+                              <p className={`text-xs sm:text-sm leading-relaxed mb-4 line-clamp-2 ${darkMode ? 'text-zinc-300' : 'text-zinc-600'}`}>
+                                {slide.description}
+                              </p>
+                            </div>
+
+                            <div className="pt-3 border-t border-white/5 flex items-center justify-between">
+                              <a
+                                href="#services"
+                                className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#d4af37] hover:text-[#ffe08d] transition-colors group/btn cursor-pointer"
+                              >
+                                <span>Book Transformation</span>
+                                <span className="material-symbols-outlined text-sm transition-transform duration-300 group-hover/btn:translate-x-1">arrow_forward</span>
+                              </a>
+                              <span className={`text-[0.65rem] sm:text-xs font-medium ${darkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>
+                                {slide.statSub}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                      <div className={`p-3.5 sm:p-4 rounded-xl sm:rounded-2xl border shadow-inner ${darkMode ? 'bg-[#181818]/90 border-[#d4af37]/35 text-white' : 'bg-white/80 border-[#d4af37]/30 text-zinc-900'
-                        }`}>
-                        <div className="font-headline-sm text-lg sm:text-xl font-bold text-[#d4af37] mb-1">100% Intact</div>
-                        <p className={`text-[0.7rem] sm:text-xs ${darkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>Natural nail keratin protected with botanical base</p>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Carousel Pagination Dots */}
+                <div className="flex items-center justify-center gap-2 mt-6">
+                  {Array.from({ length: isDesktop ? 3 : 4 }).map((_, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setTransIndex(idx)}
+                      aria-label={`Go to slide ${idx + 1}`}
+                      className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                        transIndex === idx
+                          ? 'w-8 bg-gradient-to-r from-[#ffe08d] via-[#d4af37] to-[#b38f26]'
+                          : darkMode
+                            ? 'w-2 bg-white/20 hover:bg-white/40'
+                            : 'w-2 bg-zinc-300 hover:bg-zinc-400'
+                      }`}
+                    />
+                  ))}
+                </div>
+
+                {/* Clinical Guarantee Bottom Trust Bar */}
+                <div className={`mt-8 p-4 sm:p-6 rounded-2xl border flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6 ${
+                  darkMode ? 'bg-[#0f0d14]/90 border-[#d4af37]/30' : 'bg-white/90 border-[#d4af37]/30'
+                }`}>
+                  <div className="grid grid-cols-2 gap-4 w-full md:w-auto">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-[#ffe08d]/10 border border-[#d4af37]/40 flex items-center justify-center shrink-0">
+                        <span className="font-bold text-[#d4af37] text-sm">0%</span>
+                      </div>
+                      <div>
+                        <div className="font-bold text-xs sm:text-sm text-[#d4af37]">0% Lifting Guarantee</div>
+                        <p className={`text-[0.6875rem] sm:text-xs ${darkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>Flawless cuticle edge for 4-6 weeks</p>
                       </div>
                     </div>
-                    <a
-                      className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-gradient-to-r from-[#ffe08d] via-[#d4af37] to-[#b38f26] text-black border border-[#ffe08d]/60 font-label-md text-xs sm:text-label-md uppercase tracking-wider font-bold hover:brightness-110 transition-all shadow-md w-full sm:w-fit text-center"
-                      href="#services"
-                    >
-                      <span>Book Transformation Ritual</span>
-                      <span className="material-symbols-outlined text-sm text-black">arrow_forward</span>
-                    </a>
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-[#ffe08d]/10 border border-[#d4af37]/40 flex items-center justify-center shrink-0">
+                        <span className="font-bold text-[#d4af37] text-sm">100%</span>
+                      </div>
+                      <div>
+                        <div className="font-bold text-xs sm:text-sm text-[#d4af37]">100% Intact Plate</div>
+                        <p className={`text-[0.6875rem] sm:text-xs ${darkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>Protected natural keratin structure</p>
+                      </div>
+                    </div>
                   </div>
+                  <a
+                    href="#services"
+                    className="w-full md:w-auto px-6 py-3.5 rounded-full bg-gradient-to-r from-[#ffe08d] via-[#d4af37] to-[#b38f26] text-black font-label-md text-xs sm:text-sm uppercase tracking-wider font-extrabold hover:brightness-110 transition-all shadow-md text-center shrink-0"
+                  >
+                    Reserve Transformation Ritual
+                  </a>
                 </div>
               </div>
 
