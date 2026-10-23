@@ -765,8 +765,9 @@ export default function App() {
                 alt={lightboxItem.title}
                 className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
               />
-              <div className="absolute top-3 left-3 sm:top-4 sm:left-4 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full bg-burgundy/85 border border-[#d4af37]/60 backdrop-blur-md text-[#ffe08d] font-label-sm text-[0.6875rem] sm:text-xs tracking-wider uppercase font-bold">
-                {lightboxItem.tag || 'Couture Selection'}
+              <div className="absolute top-3 left-3 sm:top-4 sm:left-4 px-3.5 py-1.5 rounded-full bg-black/90 border border-[#d4af37]/70 backdrop-blur-md text-[#ffe08d] font-label-sm text-[0.6875rem] sm:text-xs tracking-wider uppercase font-bold shadow-[0_4px_20px_rgba(0,0,0,0.6)] flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#d4af37]"></span>
+                <span>{lightboxItem.tag || 'Couture Selection'}</span>
               </div>
             </div>
 
