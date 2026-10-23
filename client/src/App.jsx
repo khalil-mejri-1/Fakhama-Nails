@@ -1374,11 +1374,11 @@ export default function App() {
                       className="w-full h-auto object-cover max-h-[260px] xs:max-h-[300px] sm:max-h-[380px] lg:max-h-[480px]"
                       src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIe2HiI78nSY8QurPYxN36-cOXYmxSPxIvl2qt8H4l84awN3-WxNlJR6kG_rdOCWs5HVu64HYiooMLDoKcMdB9IQF31dcOxfYYkp6a6rPPyqtGRElNnWiX0S-po7tzUuFLJmdat0VTgPCrcRo-nvhOCB6w--TXswvP8wGa7l5ibr8I2NMRGiGDV65m97DRHXwyVI7NDiPw1mf5Zg4HsS8FOl7V7L32Rco7XCEyiOyaXEnFpvIPzdlw"
                     />
-                    <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-black/80 backdrop-blur-md text-white font-label-sm text-[0.625rem] sm:text-[0.6875rem] tracking-wider uppercase font-medium border border-white/20">
-                      Before: Brittle / Damaged
+                    <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-black/80 backdrop-blur-md text-white font-label-sm text-[0.625rem] sm:text-[0.6875rem] tracking-wider uppercase font-medium border border-white/20 shadow-sm">
+                      Before
                     </div>
-                    <div className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-gradient-to-r from-[#ffe08d] via-[#d4af37] to-[#b38f26] border border-[#ffe08d]/60 backdrop-blur-md text-black font-label-sm text-[0.625rem] sm:text-[0.6875rem] tracking-wider uppercase font-bold shadow-md">
-                      After: Fakhama Russian Gel
+                    <div className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-gradient-to-r from-[#ffe08d] via-[#d4af37] to-[#b38f26] border border-[#ffe08d]/60 backdrop-blur-md text-black font-label-sm text-[0.625rem] sm:text-[0.6875rem] tracking-wider uppercase font-bold shadow-md">
+                      After
                     </div>
                   </div>
 
