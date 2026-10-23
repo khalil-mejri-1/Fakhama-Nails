@@ -1179,7 +1179,8 @@ export default function App() {
                         return {
                           container: 'bg-gradient-to-b from-[#3a2c17] via-[#271d0e] to-[#150f06] border-2 border-[#ffe08d] shadow-[0_22px_60px_rgba(212,175,55,0.45),0_0_40px_rgba(212,175,55,0.25)] hover:shadow-[0_26px_75px_rgba(212,175,55,0.65)] ring-1 ring-[#ffe08d]/50',
                           badge: 'bg-[#ffe08d]/20 text-[#ffe08d] border-[#ffe08d]/60',
-                          button: 'bg-gradient-to-r from-[#ffe08d] via-[#d4af37] to-[#b38f26] text-black border border-[#fff2b2] shadow-[0_0_30px_rgba(212,175,55,0.6)] hover:brightness-110'
+                          button: 'bg-gradient-to-r from-[#ffe08d] via-[#d4af37] to-[#b38f26] text-black border border-[#fff2b2] shadow-[0_0_30px_rgba(212,175,55,0.6)] hover:brightness-110',
+                          imageBorder: 'border-b border-[#ffe08d]/40'
                         };
                       }
 
@@ -1189,27 +1190,31 @@ export default function App() {
                           return {
                             container: 'bg-gradient-to-b from-[#1c2533] via-[#131b26] to-[#0a0e14] border-2 border-[#6ea0cc]/50 hover:border-[#ffe08d] shadow-[0_20px_50px_rgba(0,0,0,0.45),0_0_30px_rgba(110,160,204,0.22)] hover:shadow-[0_25px_65px_rgba(212,175,55,0.4)]',
                             badge: 'bg-[#6ea0cc]/20 text-[#c2dcfa] border-[#6ea0cc]/50',
-                            button: 'bg-[#141b26] hover:bg-gradient-to-r hover:from-[#ffe08d] hover:via-[#d4af37] hover:to-[#b38f26] hover:text-black text-[#d9e8f7] border border-[#6ea0cc]/60 hover:border-[#ffe08d] shadow-[0_0_15px_rgba(110,160,204,0.2)]'
+                            button: 'bg-[#141b26] hover:bg-gradient-to-r hover:from-[#ffe08d] hover:via-[#d4af37] hover:to-[#b38f26] hover:text-black text-[#d9e8f7] border border-[#6ea0cc]/60 hover:border-[#ffe08d] shadow-[0_0_15px_rgba(110,160,204,0.2)]',
+                            imageBorder: 'border-b border-[#6ea0cc]/40'
                           };
                         case 3:
                           // Card 3: Burnished Copper-Bronze & Sunset Amber
                           return {
                             container: 'bg-gradient-to-b from-[#322015] via-[#24160e] to-[#140c07] border-2 border-[#e6985a]/50 hover:border-[#ffe08d] shadow-[0_20px_50px_rgba(0,0,0,0.45),0_0_30px_rgba(230,152,90,0.22)] hover:shadow-[0_25px_65px_rgba(212,175,55,0.4)]',
                             badge: 'bg-[#e6985a]/20 text-[#fcd3b6] border-[#e6985a]/50',
-                            button: 'bg-[#22150d] hover:bg-gradient-to-r hover:from-[#ffe08d] hover:via-[#d4af37] hover:to-[#b38f26] hover:text-black text-[#fde3d2] border border-[#e6985a]/60 hover:border-[#ffe08d] shadow-[0_0_15px_rgba(230,152,90,0.2)]'
+                            button: 'bg-[#22150d] hover:bg-gradient-to-r hover:from-[#ffe08d] hover:via-[#d4af37] hover:to-[#b38f26] hover:text-black text-[#fde3d2] border border-[#e6985a]/60 hover:border-[#ffe08d] shadow-[0_0_15px_rgba(230,152,90,0.2)]',
+                            imageBorder: 'border-b border-[#e6985a]/40'
                           };
                         case 4:
                           // Card 4: Royal Midnight Amethyst & Platinum Noir
                           return {
                             container: 'bg-gradient-to-b from-[#2d1a38] via-[#1f1027] to-[#120818] border-2 border-[#c885ea]/50 hover:border-[#ffe08d] shadow-[0_20px_50px_rgba(0,0,0,0.45),0_0_30px_rgba(200,133,234,0.22)] hover:shadow-[0_25px_65px_rgba(212,175,55,0.4)]',
                             badge: 'bg-[#c885ea]/20 text-[#e9c1fb] border-[#c885ea]/50',
-                            button: 'bg-[#1f0f29] hover:bg-gradient-to-r hover:from-[#ffe08d] hover:via-[#d4af37] hover:to-[#b38f26] hover:text-black text-[#f4dcfd] border border-[#c885ea]/60 hover:border-[#ffe08d] shadow-[0_0_15px_rgba(200,133,234,0.2)]'
+                            button: 'bg-[#1f0f29] hover:bg-gradient-to-r hover:from-[#ffe08d] hover:via-[#d4af37] hover:to-[#b38f26] hover:text-black text-[#f4dcfd] border border-[#c885ea]/60 hover:border-[#ffe08d] shadow-[0_0_15px_rgba(200,133,234,0.2)]',
+                            imageBorder: 'border-b border-[#c885ea]/40'
                           };
                         default:
                           return {
                             container: 'bg-gradient-to-b from-[#261f17] via-[#1a150e] to-[#100d08] border-2 border-[#d4af37]/45 hover:border-[#ffe08d] shadow-[0_18px_50px_rgba(0,0,0,0.45),0_0_25px_rgba(212,175,55,0.18)] hover:shadow-[0_22px_60px_rgba(212,175,55,0.35)]',
                             badge: 'bg-[#d4af37]/15 text-[#ffe08d] border-[#d4af37]/40',
-                            button: 'bg-[#1e1811] hover:bg-gradient-to-r hover:from-[#ffe08d] hover:via-[#d4af37] hover:to-[#b38f26] hover:text-black text-[#ffe08d] border border-[#d4af37]/60 hover:border-[#ffe08d]'
+                            button: 'bg-[#1e1811] hover:bg-gradient-to-r hover:from-[#ffe08d] hover:via-[#d4af37] hover:to-[#b38f26] hover:text-black text-[#ffe08d] border border-[#d4af37]/60 hover:border-[#ffe08d]',
+                            imageBorder: 'border-b border-[#d4af37]/40'
                           };
                       }
                     })();
@@ -1217,10 +1222,10 @@ export default function App() {
                     return (
                       <div
                         key={card.id}
-                        className={`p-5 xs:p-6 sm:p-7 lg:p-8 rounded-2xl sm:rounded-3xl max-w-[360px] xs:max-w-[380px] sm:max-w-none mx-auto w-full flex flex-col justify-between group transition-all duration-500 text-white relative transform hover:-translate-y-1.5 ${card.featured ? 'lg:-translate-y-2.5' : ''} ${cardTheme.container}`}
+                        className={`rounded-2xl sm:rounded-3xl max-w-[360px] xs:max-w-[380px] sm:max-w-none mx-auto w-full flex flex-col justify-between group transition-all duration-500 text-white relative transform hover:-translate-y-1.5 ${card.featured ? 'lg:-translate-y-2.5' : ''} ${cardTheme.container}`}
                       >
                         {/* Specular Highlight Line at the Top of the Card */}
-                        <div className="absolute top-0 left-6 right-6 h-[1.5px] bg-gradient-to-r from-transparent via-[#ffe08d]/60 to-transparent pointer-events-none rounded-full"></div>
+                        <div className="absolute top-0 left-6 right-6 h-[1.5px] bg-gradient-to-r from-transparent via-[#ffe08d]/60 to-transparent pointer-events-none rounded-full z-20"></div>
 
                         {card.featured && (
                           <div className="absolute -top-3.5 sm:-top-4 left-1/2 -translate-x-1/2 px-3.5 sm:px-4 py-1 sm:py-1.5 rounded-full bg-gradient-to-r from-[#ffe08d] via-[#d4af37] to-[#b38f26] text-black font-label-sm text-[0.625rem] sm:text-[0.6875rem] uppercase tracking-widest font-black shadow-[0_4px_25px_rgba(212,175,55,0.65)] whitespace-nowrap flex items-center gap-1.5 border-2 border-[#fff2b2] z-30">
@@ -1229,50 +1234,57 @@ export default function App() {
                           </div>
                         )}
 
-                        <div>
-                          {/* Thumbnail Preview */}
-                          <div className="w-full aspect-[16/10] rounded-xl sm:rounded-2xl overflow-hidden mb-3.5 sm:mb-6 border border-[#d4af37]/40 relative bg-black mt-1 sm:mt-2 shadow-inner">
-                            <img alt={card.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-108" src={card.image} />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-                            <span className="absolute bottom-2 left-2 sm:bottom-2.5 sm:left-2.5 px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-black/90 text-[#ffe08d] border border-[#d4af37]/60 font-label-sm text-[0.6rem] sm:text-[0.65rem] font-bold tracking-wider uppercase backdrop-blur-md shadow-md">
-                              {card.tag}
-                            </span>
-                          </div>
-
-                          <div className="flex items-center justify-between mb-2.5 sm:mb-3">
-                            <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full font-label-sm text-[0.625rem] sm:text-label-sm uppercase tracking-wider font-bold border shadow-xs ${cardTheme.badge}`}>
-                              <span className="material-symbols-outlined text-[0.75rem] sm:text-xs">schedule</span>
-                              <span>{card.duration}</span>
-                            </span>
-                            <span className="font-headline-sm text-xl sm:text-2xl font-display-hero font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#ffe08d] via-[#d4af37] to-[#f5d77f] drop-shadow-[0_2px_12px_rgba(212,175,55,0.3)]">
-                              {card.price}
-                            </span>
-                          </div>
-
-                          <h3 className="font-title-lg text-base sm:text-lg lg:text-xl font-bold mb-1.5 sm:mb-2.5 text-white group-hover:text-[#ffe08d] transition-colors leading-snug">
-                            {card.title}
-                          </h3>
-
-                          <p className="font-body-sm text-[0.75rem] sm:text-xs lg:text-sm mb-3 sm:mb-5 leading-normal sm:leading-relaxed text-zinc-300 font-light">
-                            {card.description}
-                          </p>
-
-                          <ul className="space-y-1.5 sm:space-y-2.5 mb-4 sm:mb-7">
-                            {card.features.map((feat, idx) => (
-                              <li key={idx} className="flex items-center gap-1.5 sm:gap-2 font-body-sm text-[0.75rem] sm:text-xs lg:text-sm text-zinc-200">
-                                <span className="material-symbols-outlined text-xs sm:text-sm text-[#d4af37] shrink-0" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
-                                <span>{feat}</span>
-                              </li>
-                            ))}
-                          </ul>
+                        {/* Thumbnail Preview - Full Bleed (flush to top, left, and right) */}
+                        <div className={`w-full aspect-[16/10] rounded-t-[14px] sm:rounded-t-[22px] overflow-hidden relative bg-black shrink-0 ${cardTheme.imageBorder} shadow-inner`}>
+                          <img
+                            alt={card.title}
+                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-108"
+                            src={card.image}
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent"></div>
+                          <span className="absolute bottom-2.5 left-3 sm:bottom-3 sm:left-3.5 px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-black/90 text-[#ffe08d] border border-[#d4af37]/60 font-label-sm text-[0.6rem] sm:text-[0.65rem] font-bold tracking-wider uppercase backdrop-blur-md shadow-md">
+                            {card.tag}
+                          </span>
                         </div>
 
-                        <button
-                          onClick={() => handleBooking(card.title)}
-                          className={`w-full py-3 sm:py-3.5 rounded-full font-label-md text-xs sm:text-label-md uppercase tracking-wider transition-all duration-300 font-extrabold cursor-pointer transform hover:scale-[1.02] ${cardTheme.button}`}
-                        >
-                          Select & Book
-                        </button>
+                        {/* Card Content Body with Luxury Padding */}
+                        <div className="p-4 xs:p-5 sm:p-6 lg:p-7 flex flex-col flex-grow justify-between">
+                          <div>
+                            <div className="flex items-center justify-between mb-2.5 sm:mb-3">
+                              <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full font-label-sm text-[0.625rem] sm:text-label-sm uppercase tracking-wider font-bold border shadow-xs ${cardTheme.badge}`}>
+                                <span className="material-symbols-outlined text-[0.75rem] sm:text-xs">schedule</span>
+                                <span>{card.duration}</span>
+                              </span>
+                              <span className="font-headline-sm text-xl sm:text-2xl font-display-hero font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#ffe08d] via-[#d4af37] to-[#f5d77f] drop-shadow-[0_2px_12px_rgba(212,175,55,0.3)]">
+                                {card.price}
+                              </span>
+                            </div>
+
+                            <h3 className="font-title-lg text-base sm:text-lg lg:text-xl font-bold mb-1.5 sm:mb-2.5 text-white group-hover:text-[#ffe08d] transition-colors leading-snug">
+                              {card.title}
+                            </h3>
+
+                            <p className="font-body-sm text-[0.75rem] sm:text-xs lg:text-sm mb-3 sm:mb-5 leading-normal sm:leading-relaxed text-zinc-300 font-light">
+                              {card.description}
+                            </p>
+
+                            <ul className="space-y-1.5 sm:space-y-2.5 mb-4 sm:mb-7">
+                              {card.features.map((feat, idx) => (
+                                <li key={idx} className="flex items-center gap-1.5 sm:gap-2 font-body-sm text-[0.75rem] sm:text-xs lg:text-sm text-zinc-200">
+                                  <span className="material-symbols-outlined text-xs sm:text-sm text-[#d4af37] shrink-0" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
+                                  <span>{feat}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+
+                          <button
+                            onClick={() => handleBooking(card.title)}
+                            className={`w-full py-3 sm:py-3.5 rounded-full font-label-md text-xs sm:text-label-md uppercase tracking-wider transition-all duration-300 font-extrabold cursor-pointer transform hover:scale-[1.02] ${cardTheme.button}`}
+                          >
+                            Select & Book
+                          </button>
+                        </div>
                       </div>
                     );
                   })}
