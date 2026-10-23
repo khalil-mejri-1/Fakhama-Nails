@@ -414,6 +414,19 @@ export default function App() {
   const [transTouchStart, setTransTouchStart] = useState(null);
   const [transTouchEnd, setTransTouchEnd] = useState(null);
   const [isDesktop, setIsDesktop] = useState(() => typeof window !== 'undefined' && window.innerWidth >= 1024);
+  const [transAutoPlay, setTransAutoPlay] = useState(true);
+
+  // Auto-advance carousel every 1.5 seconds until user touches/interacts with the section
+  useEffect(() => {
+    if (!transAutoPlay) return;
+    const interval = setInterval(() => {
+      setTransIndex((prev) => {
+        const maxIdx = isDesktop ? 2 : 3;
+        return prev >= maxIdx ? 0 : prev + 1;
+      });
+    }, 1500);
+    return () => clearInterval(interval);
+  }, [transAutoPlay, isDesktop]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -651,16 +664,19 @@ export default function App() {
   ];
 
   const handleTransNext = () => {
+    setTransAutoPlay(false);
     const maxIdx = isDesktop ? 2 : 3;
     setTransIndex(prev => (prev >= maxIdx ? 0 : prev + 1));
   };
 
   const handleTransPrev = () => {
+    setTransAutoPlay(false);
     const maxIdx = isDesktop ? 2 : 3;
     setTransIndex(prev => (prev <= 0 ? maxIdx : prev - 1));
   };
 
   const handleTransTouchStart = (e) => {
+    setTransAutoPlay(false);
     setTransTouchStart(e.targetTouches[0].clientX);
   };
 
@@ -860,11 +876,10 @@ export default function App() {
                     key={item.id}
                     href={item.href}
                     onClick={() => setActiveNav(item.id)}
-                    className={`text-xs uppercase tracking-widest transition-all duration-300 relative py-1 cursor-pointer select-none ${
-                      isActive
+                    className={`text-xs uppercase tracking-widest transition-all duration-300 relative py-1 cursor-pointer select-none ${isActive
                         ? `font-bold ${darkMode ? 'text-[#ffe08d]' : 'text-amber-900'} after:content-[''] after:absolute after:-bottom-1.5 after:left-0 after:w-full after:h-[2px] after:bg-gradient-to-r after:from-[#ffe08d] after:via-[#d4af37] after:to-[#b38f26] after:rounded-full after:shadow-[0_2px_8px_rgba(212,175,55,0.6)]`
                         : `font-semibold ${darkMode ? 'text-white/80 hover:text-[#ffe08d]' : 'text-zinc-700 hover:text-amber-900'} hover:after:content-[''] hover:after:absolute hover:after:-bottom-1.5 hover:after:left-0 hover:after:w-full hover:after:h-[1.5px] hover:after:bg-[#d4af37]/40`
-                    }`}
+                      }`}
                   >
                     {item.label}
                   </a>
@@ -937,27 +952,23 @@ export default function App() {
         {/* Backdrop Overlay with Fluid Fade In/Out Animation */}
         <div
           onClick={() => setMobileMenuOpen(false)}
-          className={`fixed inset-0 bg-black/60 backdrop-blur-xs z-[90] transition-opacity duration-400 ease-in-out ${
-            mobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-          }`}
+          className={`fixed inset-0 bg-black/60 backdrop-blur-xs z-[90] transition-opacity duration-400 ease-in-out ${mobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+            }`}
           aria-hidden={!mobileMenuOpen}
         />
 
         {/* Sliding Side Drawer Panel */}
         <aside
           aria-label="Mobile Navigation Menu"
-          className={`fixed top-0 right-0 bottom-0 h-full w-full max-w-[320px] xs:max-w-[360px] sm:max-w-[380px] z-[100] flex flex-col justify-between shadow-2xl transition-transform duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-            mobileMenuOpen ? 'translate-x-0 pointer-events-auto' : 'translate-x-full pointer-events-none'
-          } ${
-            darkMode
+          className={`fixed top-0 right-0 bottom-0 h-full w-full max-w-[320px] xs:max-w-[360px] sm:max-w-[380px] z-[100] flex flex-col justify-between shadow-2xl transition-transform duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] ${mobileMenuOpen ? 'translate-x-0 pointer-events-auto' : 'translate-x-full pointer-events-none'
+            } ${darkMode
               ? 'bg-[#0c0c0c] border-l border-[#d4af37]/30 text-white shadow-[-20px_0_60px_rgba(0,0,0,0.85)]'
               : 'bg-[#fcf9f5] border-l border-[#d4af37]/40 text-zinc-900 shadow-[-20px_0_50px_rgba(0,0,0,0.18)]'
-          }`}
+            }`}
         >
           {/* Drawer Top Bar: Brand Monogram & Close Button */}
-          <div className={`p-5 sm:p-6 flex items-center justify-between border-b ${
-            darkMode ? 'bg-[#121212] border-white/10' : 'bg-[#f6eee4] border-[#d4af37]/30'
-          }`}>
+          <div className={`p-5 sm:p-6 flex items-center justify-between border-b ${darkMode ? 'bg-[#121212] border-white/10' : 'bg-[#f6eee4] border-[#d4af37]/30'
+            }`}>
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 flex items-center justify-center shrink-0">
                 <img
@@ -979,11 +990,10 @@ export default function App() {
             {/* Circular Close Button */}
             <button
               onClick={() => setMobileMenuOpen(false)}
-              className={`w-9 h-9 rounded-full flex items-center justify-center border transition-all duration-300 cursor-pointer ${
-                darkMode
+              className={`w-9 h-9 rounded-full flex items-center justify-center border transition-all duration-300 cursor-pointer ${darkMode
                   ? 'border-white/15 bg-white/5 text-white/80 hover:text-white hover:border-[#ffe08d] hover:bg-white/10'
                   : 'border-[#d4af37]/40 bg-white text-zinc-800 hover:text-amber-950 hover:bg-amber-50 shadow-xs'
-              }`}
+                }`}
               aria-label="Close menu"
             >
               <span className="material-symbols-outlined text-lg">close</span>
@@ -991,12 +1001,10 @@ export default function App() {
           </div>
 
           {/* Navigation Links Area (Clean, Airy, Haute Couture - NO lines below buttons!) */}
-          <div className={`flex-1 overflow-y-auto px-5 sm:px-6 py-6 flex flex-col gap-2 ${
-            darkMode ? 'bg-[#0c0c0c]' : 'bg-[#fcf9f5]'
-          }`}>
-            <span className={`text-[0.65rem] uppercase tracking-[0.28em] font-extrabold px-3 mb-1 ${
-              darkMode ? 'text-[#ffe08d]/80' : 'text-amber-900'
+          <div className={`flex-1 overflow-y-auto px-5 sm:px-6 py-6 flex flex-col gap-2 ${darkMode ? 'bg-[#0c0c0c]' : 'bg-[#fcf9f5]'
             }`}>
+            <span className={`text-[0.65rem] uppercase tracking-[0.28em] font-extrabold px-3 mb-1 ${darkMode ? 'text-[#ffe08d]/80' : 'text-amber-900'
+              }`}>
               Navigation Menu
             </span>
 
@@ -1010,27 +1018,23 @@ export default function App() {
                     setActiveNav(item.id);
                     setMobileMenuOpen(false);
                   }}
-                  className={`group relative py-3 px-3.5 rounded-xl transition-all duration-300 flex items-center justify-between cursor-pointer select-none ${
-                    isActive
-                      ? `${
-                          darkMode
-                            ? 'bg-gradient-to-r from-[#d4af37]/20 via-[#d4af37]/10 to-transparent border border-[#d4af37]/40 text-[#ffe08d] font-bold'
-                            : 'bg-gradient-to-r from-amber-200/60 via-amber-100/50 to-transparent border border-[#d4af37]/50 text-amber-950 font-bold shadow-xs'
-                        }`
-                      : `${
-                          darkMode
-                            ? 'text-white/85 hover:text-[#ffe08d] hover:bg-white/5 hover:translate-x-1 font-medium'
-                            : 'text-zinc-800 hover:text-amber-950 hover:bg-amber-900/5 hover:translate-x-1 font-semibold'
-                        }`
-                  }`}
+                  className={`group relative py-3 px-3.5 rounded-xl transition-all duration-300 flex items-center justify-between cursor-pointer select-none ${isActive
+                      ? `${darkMode
+                        ? 'bg-gradient-to-r from-[#d4af37]/20 via-[#d4af37]/10 to-transparent border border-[#d4af37]/40 text-[#ffe08d] font-bold'
+                        : 'bg-gradient-to-r from-amber-200/60 via-amber-100/50 to-transparent border border-[#d4af37]/50 text-amber-950 font-bold shadow-xs'
+                      }`
+                      : `${darkMode
+                        ? 'text-white/85 hover:text-[#ffe08d] hover:bg-white/5 hover:translate-x-1 font-medium'
+                        : 'text-zinc-800 hover:text-amber-950 hover:bg-amber-900/5 hover:translate-x-1 font-semibold'
+                      }`
+                    }`}
                   href={item.href}
                 >
                   <div className="flex items-center gap-3">
-                    <span className={`text-xs font-mono tracking-wider transition-colors ${
-                      isActive
+                    <span className={`text-xs font-mono tracking-wider transition-colors ${isActive
                         ? darkMode ? 'text-[#d4af37] font-bold' : 'text-amber-950 font-black'
                         : darkMode ? 'text-zinc-500 group-hover:text-[#d4af37]' : 'text-[#b38f26] font-bold'
-                    }`}>
+                      }`}>
                       {numStr}
                     </span>
                     <span className="text-sm uppercase tracking-[0.16em]">
@@ -1047,9 +1051,8 @@ export default function App() {
           </div>
 
           {/* Drawer Footer: Reserve Button & Atelier Details */}
-          <div className={`p-5 sm:p-6 border-t flex flex-col gap-3.5 ${
-            darkMode ? 'border-white/10 bg-[#121212]' : 'border-[#d4af37]/30 bg-[#f6eee4]'
-          }`}>
+          <div className={`p-5 sm:p-6 border-t flex flex-col gap-3.5 ${darkMode ? 'border-white/10 bg-[#121212]' : 'border-[#d4af37]/30 bg-[#f6eee4]'
+            }`}>
             <a
               onClick={() => setMobileMenuOpen(false)}
               className="w-full py-3.5 rounded-full bg-gradient-to-r from-[#ffe08d] via-[#d4af37] to-[#b38f26] text-black text-center font-label-lg uppercase tracking-widest text-xs font-extrabold shadow-[0_6px_20px_rgba(212,175,55,0.35)] border border-[#ffe08d] hover:brightness-105 transition-all cursor-pointer"
@@ -1062,9 +1065,8 @@ export default function App() {
             <div className="flex items-center justify-between pt-1 px-1 text-[0.7rem]">
               <a
                 href={`tel:${siteSettings.phoneRaw}`}
-                className={`flex items-center gap-1.5 transition-colors font-semibold ${
-                  darkMode ? 'text-white/75 hover:text-[#ffe08d]' : 'text-zinc-700 hover:text-amber-950'
-                }`}
+                className={`flex items-center gap-1.5 transition-colors font-semibold ${darkMode ? 'text-white/75 hover:text-[#ffe08d]' : 'text-zinc-700 hover:text-amber-950'
+                  }`}
               >
                 <span className="material-symbols-outlined text-sm text-[#d4af37]">call</span>
                 <span>{siteSettings.phone}</span>
@@ -1426,9 +1428,8 @@ export default function App() {
                     <div
                       key={item.id}
                       onClick={() => setLightboxItem(item)}
-                      className={`group relative rounded-xl sm:rounded-2xl lg:rounded-3xl overflow-hidden aspect-[4/5] border transition-all duration-500 cursor-pointer shadow-lg hover:shadow-[0_16px_40px_rgba(212,175,55,0.25)] hover:border-[#ffe08d] ${
-                        darkMode ? 'bg-[#0e1018] border-[#d4af37]/35' : 'bg-white border-[#d4af37]/30 shadow-md'
-                      }`}
+                      className={`group relative rounded-xl sm:rounded-2xl lg:rounded-3xl overflow-hidden aspect-[4/5] border transition-all duration-500 cursor-pointer shadow-lg hover:shadow-[0_16px_40px_rgba(212,175,55,0.25)] hover:border-[#ffe08d] ${darkMode ? 'bg-[#0e1018] border-[#d4af37]/35' : 'bg-white border-[#d4af37]/30 shadow-md'
+                        }`}
                     >
                       {/* Image with smooth luxury hover zoom */}
                       <img
@@ -1465,11 +1466,14 @@ export default function App() {
               </div>
 
               {/* SPOTLIGHT: Creative Haute Couture Before & After Carousel Showcase */}
-              <div className={`p-4 xs:p-5 sm:p-8 lg:p-12 rounded-2xl sm:rounded-3xl border shadow-2xl transition-all duration-500 mt-10 sm:mt-20 overflow-hidden ${
-                darkMode
+              <div
+                onTouchStart={() => setTransAutoPlay(false)}
+                onMouseEnter={() => setTransAutoPlay(false)}
+                className={`p-4 xs:p-5 sm:p-8 lg:p-12 rounded-2xl sm:rounded-3xl border shadow-2xl transition-all duration-500 mt-10 sm:mt-20 overflow-hidden ${darkMode
                   ? 'bg-gradient-to-br from-[#121118] via-[#161420] to-[#0d0c14] border-[#d4af37]/45 text-white'
                   : 'bg-gradient-to-br from-white via-[#fcf8f4] to-[#f7f0e8] border-[#d4af37]/40 text-zinc-900'
-              }`}>
+                }`}
+              >
                 {/* Header row with Title and Navigation Arrow Buttons */}
                 <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 sm:mb-8">
                   <div>
@@ -1479,9 +1483,7 @@ export default function App() {
                     <h3 className={`font-headline-md text-2xl sm:text-3xl font-semibold tracking-tight ${darkMode ? 'text-white' : 'text-zinc-900'}`}>
                       Before & After Transformation Atelier
                     </h3>
-                    <p className={`font-body-md text-xs sm:text-sm max-w-xl mt-1.5 ${darkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>
-                      Restorative Russian e-file sculpting & structured Japanese builder gel — witness real case studies of brittle plates transformed into pristine haute couture sets.
-                    </p>
+
                   </div>
 
                   {/* Carousel Controls */}
@@ -1489,22 +1491,20 @@ export default function App() {
                     <button
                       onClick={handleTransPrev}
                       aria-label="Previous Transformation"
-                      className={`w-10 h-10 sm:w-11 sm:h-11 rounded-full border flex items-center justify-center transition-all duration-300 cursor-pointer ${
-                        darkMode
+                      className={`w-10 h-10 sm:w-11 sm:h-11 rounded-full border flex items-center justify-center transition-all duration-300 cursor-pointer ${darkMode
                           ? 'bg-white/5 border-[#d4af37]/40 text-white hover:bg-[#d4af37] hover:text-black hover:border-[#ffe08d] shadow-md active:scale-95'
                           : 'bg-white border-[#d4af37]/50 text-zinc-800 hover:bg-[#d4af37] hover:text-white hover:border-[#ffe08d] shadow-sm active:scale-95'
-                      }`}
+                        }`}
                     >
                       <span className="material-symbols-outlined text-lg">chevron_left</span>
                     </button>
                     <button
                       onClick={handleTransNext}
                       aria-label="Next Transformation"
-                      className={`w-10 h-10 sm:w-11 sm:h-11 rounded-full border flex items-center justify-center transition-all duration-300 cursor-pointer ${
-                        darkMode
+                      className={`w-10 h-10 sm:w-11 sm:h-11 rounded-full border flex items-center justify-center transition-all duration-300 cursor-pointer ${darkMode
                           ? 'bg-white/5 border-[#d4af37]/40 text-white hover:bg-[#d4af37] hover:text-black hover:border-[#ffe08d] shadow-md active:scale-95'
                           : 'bg-white border-[#d4af37]/50 text-zinc-800 hover:bg-[#d4af37] hover:text-white hover:border-[#ffe08d] shadow-sm active:scale-95'
-                      }`}
+                        }`}
                     >
                       <span className="material-symbols-outlined text-lg">chevron_right</span>
                     </button>
@@ -1529,11 +1529,10 @@ export default function App() {
                         key={slide.id}
                         className="w-full lg:w-1/2 flex-shrink-0 px-2 sm:px-3"
                       >
-                        <div className={`h-full rounded-2xl sm:rounded-3xl border overflow-hidden transition-all duration-500 flex flex-col justify-between shadow-xl group ${
-                          darkMode
+                        <div className={`h-full rounded-2xl sm:rounded-3xl border overflow-hidden transition-all duration-500 flex flex-col justify-between shadow-xl group ${darkMode
                             ? 'bg-gradient-to-b from-[#1a1824] via-[#14121c] to-[#0c0a12] border-[#d4af37]/35 shadow-[0_15px_40px_rgba(0,0,0,0.6)]'
                             : 'bg-white border-[#d4af37]/35 shadow-[0_15px_40px_rgba(212,175,55,0.12)]'
-                        }`}>
+                          }`}>
                           {/* Image Split Showcase with BEFORE and AFTER Pills */}
                           <div className="relative aspect-[16/10] w-full overflow-hidden bg-black shrink-0 border-b border-[#d4af37]/30">
                             <img
@@ -1595,23 +1594,24 @@ export default function App() {
                   {Array.from({ length: isDesktop ? 3 : 4 }).map((_, idx) => (
                     <button
                       key={idx}
-                      onClick={() => setTransIndex(idx)}
+                      onClick={() => {
+                        setTransAutoPlay(false);
+                        setTransIndex(idx);
+                      }}
                       aria-label={`Go to slide ${idx + 1}`}
-                      className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
-                        transIndex === idx
+                      className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${transIndex === idx
                           ? 'w-8 bg-gradient-to-r from-[#ffe08d] via-[#d4af37] to-[#b38f26]'
                           : darkMode
                             ? 'w-2 bg-white/20 hover:bg-white/40'
                             : 'w-2 bg-zinc-300 hover:bg-zinc-400'
-                      }`}
+                        }`}
                     />
                   ))}
                 </div>
 
                 {/* Clinical Guarantee Bottom Trust Bar */}
-                <div className={`mt-8 p-4 sm:p-6 rounded-2xl border flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6 ${
-                  darkMode ? 'bg-[#0f0d14]/90 border-[#d4af37]/30' : 'bg-white/90 border-[#d4af37]/30'
-                }`}>
+                <div className={`mt-8 p-4 sm:p-6 rounded-2xl border flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6 ${darkMode ? 'bg-[#0f0d14]/90 border-[#d4af37]/30' : 'bg-white/90 border-[#d4af37]/30'
+                  }`}>
                   <div className="grid grid-cols-2 gap-4 w-full md:w-auto">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-full bg-[#ffe08d]/10 border border-[#d4af37]/40 flex items-center justify-center shrink-0">
