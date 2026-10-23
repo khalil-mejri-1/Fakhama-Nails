@@ -602,10 +602,10 @@ export default function App() {
   const transformationSlides = [
     {
       id: 1,
-      tag: 'CASE 01 • SOFT GEL ARCHITECTURE',
+      tag: 'CASE 01 • SOFT GEL-X',
       title: 'Apres Gel-X Sculpted Almond',
       subtitle: 'Zero-Damage Soft Gel Architecture',
-      duration: '4-Week Growth Check',
+      duration: '4-Week Check',
       statBadge: '6-Week Retention',
       statSub: '0% Lifting or Peeling',
       description: 'Severe natural plate fragility and split lateral walls restored into architectural almond extensions with iridescent glazed chrome finish.',
@@ -614,10 +614,10 @@ export default function App() {
     },
     {
       id: 2,
-      tag: 'CASE 02 • DRY E-FILE RUSSIAN',
+      tag: 'CASE 02 • RUSSIAN APEX',
       title: 'Signature Russian E-File Apex',
       subtitle: 'Diamond Grit Cuticle Detailing & Apex Alignment',
-      duration: '5-Week Growth Check',
+      duration: '5-Week Check',
       statBadge: '100% Plate Integrity',
       statSub: 'Gentle Botanical Conditioning',
       description: 'Severe ridging, thin nail beds, and rough keratin buildup gently smoothed with dry diamond micro-bits and reinforced with Japanese builder gel.',
@@ -626,11 +626,11 @@ export default function App() {
     },
     {
       id: 3,
-      tag: 'CASE 03 • 3D HAUTE COUTURE',
+      tag: 'CASE 03 • 3D GOLD ART',
       title: 'Haute 3D Chrome & Gilded Sculpting',
       subtitle: 'Runway Crystal Relief & Metallic Mirror Finishing',
-      duration: '4-Week Growth Check',
-      statBadge: 'Handcrafted Artistry',
+      duration: '4-Week Check',
+      statBadge: '3D Gold Relief',
       statSub: 'Swarovski & 24K Leaf Encapsulated',
       description: 'Bitten, uneven short nails elevated into runway-level statement art with sculpted 3D baroque gold reliefs and hand-placed crystals.',
       image: '/transformations/trans_chrome.jpg',
@@ -638,11 +638,11 @@ export default function App() {
     },
     {
       id: 4,
-      tag: 'CASE 04 • RESTORATIVE THERAPY',
+      tag: 'CASE 04 • RESTORATION',
       title: 'Royal Rose Petal & Keratin Recovery',
       subtitle: 'Paraffin Restorative Therapy & Deep Cuticle Care',
-      duration: '6-Week Growth Check',
-      statBadge: 'Clinical Health Guarantee',
+      duration: '6-Week Check',
+      statBadge: 'Keratin Recovery',
       statSub: 'Damascus Rose Soak & Volcanic Scrub',
       description: 'Damaged, chemically stripped acrylic trauma reconstructed with organic camellia oil, vitamin keratin base, and smooth nude polish.',
       image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBIe2HiI78nSY8QurPYxN36-cOXYmxSPxIvl2qt8H4l84awN3-WxNlJR6kG_rdOCWs5HVu64HYiooMLDoKcMdB9IQF31dcOxfYYkp6a6rPPyqtGRElNnWiX0S-po7tzUuFLJmdat0VTgPCrcRo-nvhOCB6w--TXswvP8wGa7l5ibr8I2NMRGiGDV65m97DRHXwyVI7NDiPw1mf5Zg4HsS8FOl7V7L32Rco7XCEyiOyaXEnFpvIPzdlw',
@@ -1465,7 +1465,7 @@ export default function App() {
               </div>
 
               {/* SPOTLIGHT: Creative Haute Couture Before & After Carousel Showcase */}
-              <div className={`p-5 sm:p-8 lg:p-12 rounded-2xl sm:rounded-3xl border shadow-2xl transition-all duration-500 mt-14 sm:mt-20 overflow-hidden ${
+              <div className={`p-4 xs:p-5 sm:p-8 lg:p-12 rounded-2xl sm:rounded-3xl border shadow-2xl transition-all duration-500 mt-10 sm:mt-20 overflow-hidden ${
                 darkMode
                   ? 'bg-gradient-to-br from-[#121118] via-[#161420] to-[#0d0c14] border-[#d4af37]/45 text-white'
                   : 'bg-gradient-to-br from-white via-[#fcf8f4] to-[#f7f0e8] border-[#d4af37]/40 text-zinc-900'
@@ -1563,41 +1563,26 @@ export default function App() {
                           </div>
 
                           {/* Card Content & Details */}
-                          <div className="p-4 sm:p-6 flex flex-col flex-grow justify-between">
-                            <div>
-                              <div className="flex items-center justify-between gap-2 mb-2">
-                                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#ffe08d]/10 text-[#d4af37] border border-[#d4af37]/30 text-[0.625rem] sm:text-xs font-bold uppercase tracking-wider">
-                                  <span className="material-symbols-outlined text-xs text-[#d4af37]">verified</span>
-                                  {slide.statBadge}
-                                </span>
-                                <span className={`text-[0.65rem] sm:text-xs font-medium tracking-wide ${darkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>
-                                  {slide.duration}
-                                </span>
-                              </div>
-
-                              <h4 className={`text-base sm:text-lg font-bold mb-1 leading-snug font-display-hero ${darkMode ? 'text-white' : 'text-zinc-900'}`}>
-                                {slide.title}
-                              </h4>
-                              <p className={`text-[0.7rem] sm:text-xs font-semibold mb-2 ${darkMode ? 'text-[#ffe08d]' : 'text-amber-800'}`}>
-                                {slide.subtitle}
-                              </p>
-                              <p className={`text-xs sm:text-sm leading-relaxed mb-4 line-clamp-2 ${darkMode ? 'text-zinc-300' : 'text-zinc-600'}`}>
-                                {slide.description}
-                              </p>
-                            </div>
-
-                            <div className="pt-3 border-t border-white/5 flex items-center justify-between">
-                              <a
-                                href="#services"
-                                className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#d4af37] hover:text-[#ffe08d] transition-colors group/btn cursor-pointer"
-                              >
-                                <span>Book Transformation</span>
-                                <span className="material-symbols-outlined text-sm transition-transform duration-300 group-hover/btn:translate-x-1">arrow_forward</span>
-                              </a>
-                              <span className={`text-[0.65rem] sm:text-xs font-medium ${darkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>
-                                {slide.statSub}
+                          <div className="p-4 sm:p-6 flex flex-col flex-grow">
+                            <div className="flex items-center justify-between gap-2 mb-2">
+                              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#ffe08d]/10 text-[#d4af37] border border-[#d4af37]/30 text-[0.625rem] sm:text-xs font-bold uppercase tracking-wider whitespace-nowrap">
+                                <span className="material-symbols-outlined text-xs text-[#d4af37]">verified</span>
+                                {slide.statBadge}
+                              </span>
+                              <span className={`text-[0.65rem] sm:text-xs font-medium tracking-wide whitespace-nowrap ${darkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>
+                                {slide.duration}
                               </span>
                             </div>
+
+                            <h4 className={`text-base sm:text-lg font-bold mb-1 leading-snug font-display-hero ${darkMode ? 'text-white' : 'text-zinc-900'}`}>
+                              {slide.title}
+                            </h4>
+                            <p className={`text-[0.7rem] sm:text-xs font-semibold mb-2 ${darkMode ? 'text-[#ffe08d]' : 'text-amber-800'}`}>
+                              {slide.subtitle}
+                            </p>
+                            <p className={`text-xs sm:text-sm leading-relaxed ${darkMode ? 'text-zinc-300' : 'text-zinc-600'}`}>
+                              {slide.description}
+                            </p>
                           </div>
                         </div>
                       </div>
