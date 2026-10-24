@@ -2,9 +2,22 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 // Load environment variables from .env file
 dotenv.config();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const DATA_DIR = path.join(__dirname, 'data');
+const APPOINTMENTS_FILE = path.join(DATA_DIR, 'appointments.json');
+
+// Ensure data directory exists
+if (!fs.existsSync(DATA_DIR)) {
+  fs.mkdirSync(DATA_DIR, { recursive: true });
+}
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -107,7 +120,7 @@ let orders = [
 
 // Hello World & Status
 app.get('/', (req, res) => {
-  res.send('Fakhama Nails Haute Atelier API is Running!');
+  res.send('Fakhama Nails Haute Atelier API is Running! v1');
 });
 
 app.get('/api', (req, res) => {
@@ -202,6 +215,252 @@ app.delete('/api/orders/:id', (req, res) => {
   res.json({ success: true, message: 'Commande supprimée avec succès' });
 });
 
+// ==============================================================
+// 4. APPOINTMENTS & SESSIONS API (مواعيد الجلسات والمداخيل - BD)
+// ==============================================================
+
+// Mongoose Schema for MongoDB Atlas
+const appointmentSchema = new mongoose.Schema({
+  id: { type: String, required: true, unique: true },
+  clientName: { type: String, required: true },
+  clientPhone: { type: String, default: '' },
+  date: { type: String, required: true }, // e.g. "2026-10-24T14:30"
+  duration: { type: String, default: '' }, // e.g. "60 min" (اختيارية)
+  price: { type: Number, required: true, default: 0 },
+  priceFormatted: { type: String, default: '' },
+  serviceName: { type: String, default: 'The Signature Russian Manicure' },
+  status: { type: String, enum: ['confirmed', 'completed', 'pending', 'cancelled'], default: 'confirmed' },
+  notes: { type: String, default: '' },
+  createdAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date, default: Date.now }
+});
+
+const Appointment = mongoose.models.Appointment || mongoose.model('Appointment', appointmentSchema);
+
+// Helper: load appointments from MongoDB or file-based DB
+const getAppointmentsData = async () => {
+  if (mongoose.connection.readyState === 1) {
+    try {
+      const docs = await Appointment.find().sort({ date: 1 }).lean();
+      if (docs && docs.length > 0) {
+        return docs.map(d => ({
+          id: d.id,
+          clientName: d.clientName,
+          clientPhone: d.clientPhone || '',
+          date: d.date,
+          duration: d.duration || '',
+          price: d.price,
+          priceFormatted: d.priceFormatted || `${d.price} DT`,
+          serviceName: d.serviceName || 'The Signature Russian Manicure',
+          status: d.status || 'confirmed',
+          notes: d.notes || '',
+          createdAt: d.createdAt
+        }));
+      }
+    } catch (e) {
+      console.warn('MongoDB appointments query warning:', e.message);
+    }
+  }
+
+  // Fallback to persistent file
+  try {
+    if (fs.existsSync(APPOINTMENTS_FILE)) {
+      const raw = fs.readFileSync(APPOINTMENTS_FILE, 'utf-8');
+      return JSON.parse(raw);
+    }
+  } catch (err) {
+    console.error('File DB read error:', err.message);
+  }
+  return [];
+};
+
+// Helper: save appointments to persistent file
+const saveAppointmentsToFile = (list) => {
+  try {
+    fs.writeFileSync(APPOINTMENTS_FILE, JSON.stringify(list, null, 2), 'utf-8');
+  } catch (err) {
+    console.error('File DB write error:', err.message);
+  }
+};
+
+// GET all appointments
+app.get('/api/appointments', async (req, res) => {
+  try {
+    const list = await getAppointmentsData();
+    res.json({ success: true, appointments: list });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+// POST new appointment
+app.post('/api/appointments', async (req, res) => {
+  try {
+    const {
+      clientName,
+      clientPhone = '',
+      date,
+      duration = '',
+      price = 0,
+      serviceName = 'The Signature Russian Manicure',
+      status = 'confirmed',
+      notes = ''
+    } = req.body;
+
+    if (!clientName || !date) {
+      return res.status(400).json({ success: false, message: 'Le nom de la cliente et la date de la séance sont obligatoires' });
+    }
+
+    const numericPrice = typeof price === 'number'
+      ? price
+      : parseFloat(String(price).replace(/[^0-9.]/g, '')) || 0;
+    const priceFormatted = `${numericPrice} DT`;
+    const newId = req.body.id || `APP-${Date.now().toString().slice(-6)}`;
+
+    const newAppointment = {
+      id: newId,
+      clientName,
+      clientPhone,
+      date,
+      duration,
+      price: numericPrice,
+      priceFormatted,
+      serviceName,
+      status,
+      notes,
+      createdAt: new Date().toISOString()
+    };
+
+    // Save to persistent file
+    const currentList = await getAppointmentsData();
+    const updatedList = [newAppointment, ...currentList.filter(a => a.id !== newId)];
+    saveAppointmentsToFile(updatedList);
+
+    // Save to MongoDB if connected
+    if (mongoose.connection.readyState === 1) {
+      try {
+        await Appointment.findOneAndUpdate(
+          { id: newId },
+          { ...newAppointment, updatedAt: new Date() },
+          { upsert: true, new: true }
+        );
+      } catch (dbErr) {
+        console.warn('MongoDB appointment save warning:', dbErr.message);
+      }
+    }
+
+    res.status(201).json({ success: true, appointment: newAppointment });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+// PUT update appointment
+app.put('/api/appointments/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const currentList = await getAppointmentsData();
+    const index = currentList.findIndex(a => a.id === id);
+
+    if (index === -1) {
+      return res.status(404).json({ success: false, message: 'Rendez-vous introuvable' });
+    }
+
+    const current = currentList[index];
+    const numericPrice = req.body.price !== undefined
+      ? (typeof req.body.price === 'number' ? req.body.price : parseFloat(String(req.body.price).replace(/[^0-9.]/g, '')) || 0)
+      : current.price;
+
+    const updated = {
+      ...current,
+      ...req.body,
+      id,
+      price: numericPrice,
+      priceFormatted: `${numericPrice} DT`,
+      updatedAt: new Date().toISOString()
+    };
+
+    currentList[index] = updated;
+    saveAppointmentsToFile(currentList);
+
+    if (mongoose.connection.readyState === 1) {
+      try {
+        await Appointment.findOneAndUpdate({ id }, updated, { new: true });
+      } catch (dbErr) {
+        console.warn('MongoDB appointment update warning:', dbErr.message);
+      }
+    }
+
+    res.json({ success: true, appointment: updated });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+// PATCH update appointment partial
+app.patch('/api/appointments/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const currentList = await getAppointmentsData();
+    const index = currentList.findIndex(a => a.id === id);
+
+    if (index === -1) {
+      return res.status(404).json({ success: false, message: 'Rendez-vous introuvable' });
+    }
+
+    const current = currentList[index];
+    const numericPrice = req.body.price !== undefined
+      ? (typeof req.body.price === 'number' ? req.body.price : parseFloat(String(req.body.price).replace(/[^0-9.]/g, '')) || 0)
+      : current.price;
+
+    const updated = {
+      ...current,
+      ...req.body,
+      id,
+      price: numericPrice,
+      priceFormatted: `${numericPrice} DT`,
+      updatedAt: new Date().toISOString()
+    };
+
+    currentList[index] = updated;
+    saveAppointmentsToFile(currentList);
+
+    if (mongoose.connection.readyState === 1) {
+      try {
+        await Appointment.findOneAndUpdate({ id }, updated, { new: true });
+      } catch (dbErr) {
+        console.warn('MongoDB appointment patch warning:', dbErr.message);
+      }
+    }
+
+    res.json({ success: true, appointment: updated });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+// DELETE appointment
+app.delete('/api/appointments/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const currentList = await getAppointmentsData();
+    const filtered = currentList.filter(a => a.id !== id);
+    saveAppointmentsToFile(filtered);
+
+    if (mongoose.connection.readyState === 1) {
+      try {
+        await Appointment.findOneAndDelete({ id });
+      } catch (dbErr) {
+        console.warn('MongoDB appointment delete warning:', dbErr.message);
+      }
+    }
+
+    res.json({ success: true, message: 'تم حذف الموعد بنجاح' });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+});
+
 // Connect to MongoDB Atlas (Graceful Fallback & Serverless Connection Re-use)
 let isConnected = false;
 const connectDB = async () => {
@@ -213,7 +472,7 @@ const connectDB = async () => {
       console.warn('⚠️  MONGODB_URI is not configured yet with valid credentials in .env (Running in in-memory mode)');
       return;
     }
-    await mongoose.connect(MONGODB_URI);
+    await mongoose.connect(MONGODB_URI, { serverSelectionTimeoutMS: 5000 });
     isConnected = true;
     console.log('✅ Connected to MongoDB Atlas successfully');
   } catch (error) {

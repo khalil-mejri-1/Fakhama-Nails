@@ -181,6 +181,61 @@ const INITIAL_ORDERS = [
   }
 ];
 
+const INITIAL_APPOINTMENTS = [
+  {
+    id: 'APP-101',
+    clientName: 'Mouna Ben Salem',
+    clientPhone: '+216 98 123 456',
+    date: '2026-10-24T14:30',
+    duration: '75 min',
+    price: 120,
+    priceFormatted: '120 DT',
+    serviceName: 'The Signature Russian Manicure',
+    status: 'completed',
+    notes: 'Suite Privée VIP • Macarons & Thé vert',
+    createdAt: '2026-10-24T09:00:00.000Z'
+  },
+  {
+    id: 'APP-102',
+    clientName: 'Sarra Trabelsi',
+    clientPhone: '+216 22 456 789',
+    date: '2026-10-24T16:45',
+    duration: '90 min',
+    price: 175,
+    priceFormatted: '175 DT',
+    serviceName: 'Apres Gel-X & Sculpted Extensions',
+    status: 'confirmed',
+    notes: 'Forme Modern Almond • Finition glazed chrome',
+    createdAt: '2026-10-24T10:15:00.000Z'
+  },
+  {
+    id: 'APP-103',
+    clientName: 'Rim Yaacoubi',
+    clientPhone: '+216 55 987 654',
+    date: '2026-10-25T11:00',
+    duration: '120 min',
+    price: 210,
+    priceFormatted: '210 DT',
+    serviceName: 'Couture 3D & Chrome Artistry',
+    status: 'confirmed',
+    notes: 'Parure Mariée VIP • Cristaux Swarovski',
+    createdAt: '2026-10-23T14:20:00.000Z'
+  },
+  {
+    id: 'APP-104',
+    clientName: 'Ons Jabeur',
+    clientPhone: '+216 93 333 444',
+    date: '2026-10-23T15:00',
+    duration: '90 min',
+    price: 145,
+    priceFormatted: '145 DT',
+    serviceName: 'Royal Rose Petal & Milk Pedicure',
+    status: 'completed',
+    notes: 'Bain quartz floral • Massage pierres volcaniques',
+    createdAt: '2026-10-23T08:30:00.000Z'
+  }
+];
+
 export default function App() {
   // SPA Client Routing State
   const [currentPath, setCurrentPath] = useState(() => window.location.pathname);
@@ -385,6 +440,97 @@ export default function App() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(orderObj)
+    }).catch(() => { });
+  };
+
+  // 4. Appointments State (Client Bookings & Revenue Management - BD Sync)
+  const [appointments, setAppointments] = useState(() => {
+    try {
+      const saved = localStorage.getItem('fakhama_appointments');
+      if (saved) {
+        return JSON.parse(saved);
+      }
+      return INITIAL_APPOINTMENTS;
+    } catch (e) {
+      return INITIAL_APPOINTMENTS;
+    }
+  });
+
+  // Sync appointments with API
+  useEffect(() => {
+    fetch(`${API_BASE_URL}/api/appointments`)
+      .then(res => res.json())
+      .then(data => {
+        if (data?.appointments && data.appointments.length > 0) {
+          setAppointments(data.appointments);
+          try {
+            localStorage.setItem('fakhama_appointments', JSON.stringify(data.appointments));
+          } catch (e) { }
+        }
+      })
+      .catch(() => { });
+  }, []);
+
+  const handleAddAppointment = (newApptData) => {
+    const numericPrice = typeof newApptData.price === 'number'
+      ? newApptData.price
+      : parseFloat(String(newApptData.price).replace(/[^0-9.]/g, '')) || 0;
+
+    const newAppt = {
+      ...newApptData,
+      id: newApptData.id || `APP-${Date.now().toString().slice(-6)}`,
+      price: numericPrice,
+      priceFormatted: `${numericPrice} DT`,
+      createdAt: new Date().toISOString()
+    };
+
+    const updated = [newAppt, ...appointments];
+    setAppointments(updated);
+    try { localStorage.setItem('fakhama_appointments', JSON.stringify(updated)); } catch (e) { }
+
+    fetch(`${API_BASE_URL}/api/appointments`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newAppt)
+    }).catch(() => { });
+  };
+
+  const handleUpdateAppointment = (id, updatedFields) => {
+    const numericPrice = updatedFields.price !== undefined
+      ? (typeof updatedFields.price === 'number' ? updatedFields.price : parseFloat(String(updatedFields.price).replace(/[^0-9.]/g, '')) || 0)
+      : undefined;
+
+    const updated = appointments.map(appt => {
+      if (appt.id === id) {
+        const finalPrice = numericPrice !== undefined ? numericPrice : appt.price;
+        return {
+          ...appt,
+          ...updatedFields,
+          price: finalPrice,
+          priceFormatted: `${finalPrice} DT`,
+          updatedAt: new Date().toISOString()
+        };
+      }
+      return appt;
+    });
+
+    setAppointments(updated);
+    try { localStorage.setItem('fakhama_appointments', JSON.stringify(updated)); } catch (e) { }
+
+    fetch(`${API_BASE_URL}/api/appointments/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(updatedFields)
+    }).catch(() => { });
+  };
+
+  const handleDeleteAppointment = (id) => {
+    const updated = appointments.filter(appt => appt.id !== id);
+    setAppointments(updated);
+    try { localStorage.setItem('fakhama_appointments', JSON.stringify(updated)); } catch (e) { }
+
+    fetch(`${API_BASE_URL}/api/appointments/${id}`, {
+      method: 'DELETE'
     }).catch(() => { });
   };
 
@@ -717,6 +863,10 @@ export default function App() {
         onUpdateOrderStatus={handleUpdateOrderStatus}
         onDeleteOrder={handleDeleteOrder}
         onAddOrder={handleAddOrder}
+        appointments={appointments}
+        onAddAppointment={handleAddAppointment}
+        onUpdateAppointment={handleUpdateAppointment}
+        onDeleteAppointment={handleDeleteAppointment}
         onNavigateToStore={() => navigateTo('/')}
       />
     );

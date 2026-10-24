@@ -1,0 +1,56 @@
+[
+  {
+    "id": "APP-101",
+    "clientName": "Mouna Ben Salem",
+    "clientPhone": "+216 98 123 456",
+    "date": "2026-10-24T14:30",
+    "duration": "75 min",
+    "price": 120,
+    "priceFormatted": "120 DT",
+    "serviceName": "The Signature Russian Manicure",
+    "status": "confirmed",
+    "notes": "Suite Privée VIP • Macarons & Thé vert",
+    "createdAt": "2026-10-24T09:00:00.000Z",
+    "updatedAt": "2026-10-24T10:25:33.356Z"
+  },
+  {
+    "id": "APP-102",
+    "clientName": "Sarra Trabelsi",
+    "clientPhone": "+216 22 456 789",
+    "date": "2026-10-24T16:45",
+    "duration": "90 min",
+    "price": 175,
+    "priceFormatted": "175 DT",
+    "serviceName": "Apres Gel-X & Sculpted Extensions",
+    "status": "confirmed",
+    "notes": "Forme Modern Almond • Finition glazed chrome",
+    "createdAt": "2026-10-24T10:15:00.000Z",
+    "updatedAt": "2026-10-24T10:59:26.327Z"
+  },
+  {
+    "id": "APP-103",
+    "clientName": "Rim Yaacoubi",
+    "clientPhone": "+216 55 987 654",
+    "date": "2026-10-25T11:00",
+    "duration": "120 min",
+    "price": 210,
+    "priceFormatted": "210 DT",
+    "serviceName": "Couture 3D & Chrome Artistry",
+    "status": "confirmed",
+    "notes": "Parure Mariée VIP • Cristaux Swarovski",
+    "createdAt": "2026-10-23T14:20:00.000Z"
+  },
+  {
+    "id": "APP-104",
+    "clientName": "Ons Jabeur",
+    "clientPhone": "+216 93 333 444",
+    "date": "2026-10-23T15:00",
+    "duration": "90 min",
+    "price": 145,
+    "priceFormatted": "145 DT",
+    "serviceName": "Royal Rose Petal & Milk Pedicure",
+    "status": "completed",
+    "notes": "Bain quartz floral • Massage pierres volcaniques",
+    "createdAt": "2026-10-23T08:30:00.000Z"
+  }
+]
